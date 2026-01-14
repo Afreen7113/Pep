@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Support – Pep</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+</head>
+
+<body class="feature-dark">
+
+<header class="navbar">
+    <div class="logo-wrapper">
+        <span class="logo">Pep</span>
+    </div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="features.html">Features</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="support.html" class="active">Support</a>
+    </nav>
+
+     <button class="btn-primary" onclick="openAuthModal()">
+  Get Started
+</button>
+
+
+</header>
+
+
+<section class="hero feature-wrap support-section">
+
+  <h1>Support Center</h1>
+  <p class="sub">We’re here to help you 24/7</p>
+
+  <div class="support-grid">
+
+    <!-- LIVE CHAT -->
+    <div class="support-card">
+      <h3>💬 Live Chat</h3>
+      <p>Chat instantly with our support team.</p>
+      <button class="mini-btn" onclick="startChat()">Start Chat</button>
+    </div>
+
+    <!-- RAISE TICKET -->
+    <div class="support-card popular">
+      <div class="badge">Fastest</div>
+      <h3>🎫 Raise Ticket</h3>
+      <p>Submit your issue and get a solution.</p>
+      <button class="mini-btn" onclick="openSupport()">Create Ticket</button>
+    </div>
+
+    <!-- CALL SUPPORT -->
+    <div class="support-card">
+      <h3>📞 Call Support</h3>
+      <p>Talk directly with our experts.</p>
+      <button class="mini-btn" onclick="openContact()">Contact Us</button>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- SUPPORT MODAL -->
+<div class="modal" id="supportModal">
+  <div class="modal-box support-modal">
+    <h3>Raise a Support Ticket</h3>
+
+    <input class="support-input" placeholder="Your Name">
+    <input class="support-input" placeholder="Email">
+    <textarea class="support-input" rows="4" placeholder="Describe your issue"></textarea>
+
+    <div class="modal-actions">
+      <button class="mini-btn" onclick="submitTicket()">Submit</button>
+      <button class="mini-btn outline" onclick="closeSupport()">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+
+function openSupport() {
+  document.getElementById("supportModal").style.display = "flex";
+}
+
+function closeSupport() {
+  document.getElementById("supportModal").style.display = "none";
+}
+
+function submitTicket() {
+  alert("Your ticket has been submitted successfully!");
+  closeSupport();
+}
+</script>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6965f17701fa4519826fd0cb/1jer3eh7c';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<script>
+function startChat() {
+  if (window.Tawk_API) {
+    Tawk_API.maximize();   // opens the chat widget
+  } else {
+    alert("Chat service is loading, please try again in a moment.");
+  }
+}
+</script>
+
+
+<!-- CONTACT SUPPORT MODAL -->
+<div class="modal" id="contactModal">
+  <div class="modal-box support-modal">
+
+    <h3>📞 Contact Support</h3>
+    <p class="sub-text">
+      Our support team is available 24/7 to help you.
+    </p>
+
+    <div class="contact-details">
+      <p><strong>Phone:</strong> +91 98765 43210</p>
+      <p><strong>Email:</strong> support@pep.com</p>
+      <p><strong>Hours:</strong> 24 × 7</p>
+    </div>
+
+    <div class="modal-actions">
+     <button class="mini-btn" onclick="callNow()">Call Now</button>
+      <button class="mini-btn outline" onclick="emailSupport()">Email Us</button>
+      <button class="mini-btn outline" onclick="closeContact()">Close</button>
+    </div>
+
+  </div>
+</div>
+<script>
+function openContact() {
+  document.getElementById("contactModal").style.display = "flex";
+}
+
+function closeContact() {
+  document.getElementById("contactModal").style.display = "none";
+}
+
+function emailSupport() {
+  window.location.href = "mailto:support@pep.com";
+}
+
+function callNow() {
+  window.location.href = "tel:+919876543210";
+}
+</script>
+<div class="auth-overlay" id="authOverlay">
+
+  <div class="auth-card">
+  <form id="authForm" onsubmit="handleCreateAccount(event)">
+
+    <!-- Close button -->
+    <span class="auth-close" onclick="closeAuthModal()">×</span>
+
+    <!-- Logo -->
+    <div class="auth-logo">Pep</div>
+
+    <h2>Create Account</h2>
+
+    <input type="text" id="name" placeholder="Name" required>
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="password" id="password" placeholder="Password" required>
+
+    <button class="btn-primary auth-btn" type="submit">
+      Create Account
+    </button>
+
+  </form>
+</div>
+</div>
+<script>
+function openAuthModal() {
+  document.getElementById("authOverlay").style.display = "flex";
+}
+function closeAuthModal() {
+  document.getElementById("authOverlay").style.display = "none";
+}
+</script>
+
+</body>
+</html>

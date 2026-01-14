@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pricing – Pep</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+  <div class="logo-wrapper">
+    <span class="logo" onclick="location.href='index.html'">Pep</span>
+  </div>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="features.html">Features</a>
+    <a href="pricing.html" class="active">Pricing</a>
+    <a href="support.html">Support</a>
+  </nav>
+
+  <!-- Navbar button -->
+   <button class="btn-primary" onclick="openAuthModal()">
+  Get Started
+</button>
+
+</header>
+
+<!-- PRICING SECTION -->
+<section class="pricing-section">
+
+  <h1 class="pricing-title">Simple Pricing</h1>
+  <p class="pricing-sub">Choose a plan that fits your needs</p>
+
+  <!-- TOGGLE -->
+  <div class="toggle-wrap">
+    <span>Monthly</span>
+    <label class="switch">
+      <input type="checkbox" id="priceToggle">
+      <span class="slider"></span>
+    </label>
+    <span>Yearly <small>(Save 20%)</small></span>
+  </div>
+
+  <!-- PRICING CARDS -->
+  <div class="pricing-grid">
+
+    <!-- FREE -->
+    <div class="price-card">
+      <h3>Free</h3>
+      <div class="price" data-month="₹0" data-year="₹0">₹0</div>
+      <ul>
+        <li>Basic Messaging</li>
+        <li>Limited AI Replies</li>
+        <li>Community Support</li>
+      </ul>
+      <button type="button" class="mini-btn" data-plan="Free">
+        Get Started
+      </button>
+    </div>
+
+    <!-- PRO -->
+    <div class="price-card popular">
+      <div class="badge">Most Popular</div>
+      <h3>Pro</h3>
+      <div class="price" data-month="₹199" data-year="₹159">₹199</div>
+      <ul>
+        <li>Unlimited Chats</li>
+        <li>Full AI Features</li>
+        <li>Priority Support</li>
+      </ul>
+      <button type="button" class="mini-btn" data-plan="Pro">
+        Choose Pro
+      </button>
+    </div>
+
+    <!-- TEAM -->
+    <div class="price-card">
+      <h3>Team</h3>
+      <div class="price" data-month="₹499" data-year="₹399">₹499</div>
+      <ul>
+        <li>Team Workspace</li>
+        <li>Admin Controls</li>
+        <li>Advanced Security</li>
+      </ul>
+      <button type="button" class="mini-btn" data-plan="Team">
+        Choose Team
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<!-- PAYMENT MODAL -->
+<div class="modal" id="paymentModal">
+  <div class="modal-box pay-box">
+   <h3 id="planTitle">Pro Plan – Payment</h3>
+
+<div class="pay-options">
+  <button class="pay-btn" onclick="selectPayment('upi')">
+    <img src="assets/images/upi.png"> UPI
+  </button>
+
+  <button class="pay-btn" onclick="selectPayment('card')">
+    <img src="assets/images/visa.png">
+    <img src="assets/images/mastercard.png">
+    <img src="assets/images/rupay.png">
+    Card
+  </button>
+
+  <button class="pay-btn" onclick="selectPayment('qr')">
+    <img src="assets/images/qr.png"> QR / Barcode
+  </button>
+</div>
+
+<div id="paymentArea" class="pay-demo">
+  <p>Select a payment method to continue.</p>
+</div>
+
+<button class="mini-btn" onclick="closePayment()">Close</button>
+</div>
+</div>
+<!-- FREE PLAN MODAL -->
+<div class="modal" id="freeModal">
+  <div class="modal-box pay-box">
+    <h3>🎉 Free Plan Activated</h3>
+
+    <p style="margin: 10px 0;">
+      You can start using Pep immediately with the Free plan.
+    </p>
+
+    <ul style="text-align:left; margin: 15px 0;">
+      <li>✔ Basic Messaging</li>
+      <li>✔ Limited AI Replies</li>
+      <li>✔ Community Support</li>
+    </ul>
+
+    <button class="mini-btn" onclick="closeFree()">Continue</button>
+  </div>
+</div>
+
+<!-- JAVASCRIPT (FULLY WORKING) -->
+
+<script src="js/payment.js"></script>
+<div class="auth-overlay" id="authOverlay">
+
+  <div class="auth-card">
+  <form id="authForm" onsubmit="handleCreateAccount(event)">
+
+    <!-- Close button -->
+    <span class="auth-close" onclick="closeAuthModal()">×</span>
+
+    <!-- Logo -->
+    <div class="auth-logo">Pep</div>
+
+    <h2>Create Account</h2>
+
+    <input type="text" id="name" placeholder="Name" required>
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="password" id="password" placeholder="Password" required>
+
+    <button class="btn-primary auth-btn" type="submit">
+      Create Account
+    </button>
+
+  </form>
+</div>
+</div>
+<script>
+function openAuthModal() {
+  document.getElementById("authOverlay").style.display = "flex";
+}
+function closeAuthModal() {
+  document.getElementById("authOverlay").style.display = "none";
+}
+</script>
+
+</body>
+</html>

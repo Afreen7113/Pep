@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pep – Connect. Grow. Share.</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="logo-wrapper">
+    <span class="logo">Pep</span>
+</div>
+
+        <nav>
+            <a href="index.html" class="active">Home</a>
+            <a href="features.html">Features</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="support.html">Support</a>
+        </nav>
+        <button class="btn-primary" onclick="openAuthModal()">
+  Get Started
+</button>
+
+</header>
+
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-left">
+            <img src="assets/images/chat-ui.png" alt="Chat UI" class="chat-ui">
+        </div>
+
+        <div class="hero-right">
+            <h1 class="hero-title">
+               <span class="line connect">Connect.</span>
+               <span class="line grow">Grow.</span>
+               <span class="line share">Share.</span>
+            </h1>
+            <p class="hero-desc">
+                Pep is a messaging app that uses the latest AI technology.
+                Using AI technology, Pep can predict and use a unique tone
+                for messages that are of importance to you.
+            </p>
+
+            <div class="store-buttons">
+                <div class="store-btn">
+                <img src="assets/images/apple-store.png" 
+                     alt="Apple Store" 
+                     class="apple-badge"
+                     onclick="goToApple()">
+                </div>
+                <div class="store-btn">
+                <img src="assets/images/google-play.png" 
+                     alt="Google Play"
+                     class="google-badge"
+                     onclick="goToGoogle()">
+                </div>     
+            </div>
+        </div>
+    </section>
+<!-- AUTH MODAL -->
+<div class="auth-overlay" id="authOverlay">
+
+  <div class="auth-card">
+  <form id="authForm" onsubmit="handleCreateAccount(event)">
+
+    <!-- Close button -->
+    <span class="auth-close" onclick="closeAuthModal()">×</span>
+
+    <!-- Logo -->
+    <div class="auth-logo">Pep</div>
+
+    <h2>Create Account</h2>
+
+    <input type="text" id="name" placeholder="Name" required>
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="password" id="password" placeholder="Password" required>
+
+    <button class="btn-primary auth-btn" type="submit">
+      Create Account
+    </button>
+
+  </form>
+</div>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>

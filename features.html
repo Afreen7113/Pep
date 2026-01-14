@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Features – Pep</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- SAME NAVBAR AS HOME -->
+<header class="navbar">
+  <div class="logo-wrapper">
+    <span class="logo" onclick="location.href='index.html'">Pep</span>
+  </div>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="features.html" class="active">Features</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="support.html">Support</a>
+  </nav>
+
+   <button class="btn-primary" onclick="openAuthModal()">
+  Get Started
+</button>
+
+</header>
+
+<!-- FEATURES HERO -->
+<section class="features-hero-light">
+  <h1>Features of Pep</h1>
+  <p>Why users choose Pep for smarter communication</p>
+</section>
+
+<!-- FEATURES GRID -->
+<section class="features-grid-wrap-light">
+  <div class="features-grid-light">
+
+    <div class="feature-card-light">
+      <h3>AI Smart Reply</h3>
+      <p>Instant intelligent replies based on conversation context.</p>
+    </div>
+
+    <div class="feature-card-light">
+      <h3>Time Saving</h3>
+      <p>Automated actions reduce repetitive tasks and save time.</p>
+    </div>
+
+    <div class="feature-card-light">
+      <h3>Better Focus</h3>
+      <p>Important messages are highlighted automatically.</p>
+    </div>
+
+    <div class="feature-card-light">
+      <h3>Seamless Collaboration</h3>
+      <p>Stay aligned with real-time updates and shared conversations.</p>
+    </div>
+
+    <div class="feature-card-light">
+      <h3>AI Insights</h3>
+      <p>Smart suggestions help you communicate better every day.</p>
+    </div>
+
+    <div class="feature-card-light">
+      <h3>Secure Messaging</h3>
+      <p>End-to-end encrypted chats for complete privacy.</p>
+    </div>
+
+  </div>
+</section>
+<div class="auth-overlay" id="authOverlay">
+
+  <div class="auth-card">
+  <form id="authForm" onsubmit="handleCreateAccount(event)">
+
+    <!-- Close button -->
+    <span class="auth-close" onclick="closeAuthModal()">×</span>
+
+    <!-- Logo -->
+    <div class="auth-logo">Pep</div>
+
+    <h2>Create Account</h2>
+
+    <input type="text" id="name" placeholder="Name" required>
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="password" id="password" placeholder="Password" required>
+
+    <button class="btn-primary auth-btn" type="submit">
+      Create Account
+    </button>
+
+  </form>
+</div>
+</div>
+<script>
+function openAuthModal() {
+  document.getElementById("authOverlay").style.display = "flex";
+}
+function closeAuthModal() {
+  document.getElementById("authOverlay").style.display = "none";
+}
+</script>
+
+</body>
+</html>
