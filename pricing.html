@@ -5,16 +5,24 @@
   <title>Pricing – Pep</title>
   <link rel="stylesheet" href="./css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-
 </head>
 
 <body>
 
+<button class="back-btn" onclick="goBack()">←</button>
+
 <!-- NAVBAR -->
 <header class="navbar">
-  <div class="logo-wrapper">
-    <span class="logo" onclick="location.href='index.html'">Pep</span>
+  <div class="nav-left">
+    <!-- HAMBURGER -->
+    <button class="hamburger-btn" onclick="openSidebar()">☰</button>
+
+    <!-- LOGO -->
+    <div class="logo-wrapper">
+      <span class="logo">Pep</span>
+    </div>
   </div>
+
 
   <nav>
     <a href="index.html">Home</a>
@@ -23,73 +31,59 @@
     <a href="support.html">Support</a>
   </nav>
 
-  <!-- Navbar button -->
-   <button class="btn-primary" onclick="openAuthModal()">
-  Get Started
-</button>
-
+  <div id="navAuthArea">
+    <button class="btn-primary" onclick="openAuthModal()">Get Started</button>
+  </div>
 </header>
 
-<!-- PRICING SECTION -->
+<!-- PRICING -->
 <section class="pricing-section">
-
   <h1 class="pricing-title">Simple Pricing</h1>
   <p class="pricing-sub">Choose a plan that fits your needs</p>
 
-  <!-- TOGGLE -->
   <div class="toggle-wrap">
     <span>Monthly</span>
     <label class="switch">
-      <input type="checkbox" id="priceToggle">
+      <input type="checkbox">
       <span class="slider"></span>
     </label>
     <span>Yearly <small>(Save 20%)</small></span>
   </div>
 
-  <!-- PRICING CARDS -->
   <div class="pricing-grid">
 
-    <!-- FREE -->
     <div class="price-card">
       <h3>Free</h3>
-      <div class="price" data-month="₹0" data-year="₹0">₹0</div>
+      <div class="price">₹0</div>
       <ul>
         <li>Basic Messaging</li>
         <li>Limited AI Replies</li>
         <li>Community Support</li>
       </ul>
-      <button type="button" class="mini-btn" data-plan="Free">
-        Get Started
-      </button>
+      <button class="mini-btn" onclick="openFree()">Get Started</button>
     </div>
 
-    <!-- PRO -->
     <div class="price-card popular">
       <div class="badge">Most Popular</div>
       <h3>Pro</h3>
-      <div class="price" data-month="₹199" data-year="₹159">₹199</div>
+      <div class="price">₹199</div>
       <ul>
         <li>Unlimited Chats</li>
         <li>Full AI Features</li>
         <li>Priority Support</li>
       </ul>
-      <button type="button" class="mini-btn" data-plan="Pro">
-        Choose Pro
-      </button>
+      <button class="mini-btn" onclick="openPayment('Pro')">Choose Pro</button>
     </div>
 
-    <!-- TEAM -->
     <div class="price-card">
       <h3>Team</h3>
-      <div class="price" data-month="₹499" data-year="₹399">₹499</div>
+      <div class="price">₹499</div>
       <ul>
         <li>Team Workspace</li>
         <li>Admin Controls</li>
         <li>Advanced Security</li>
       </ul>
-      <button type="button" class="mini-btn" data-plan="Team">
-        Choose Team
-      </button>
+      <button class="mini-btn" onclick="openPayment('Team')">Choose Team</button>
     </div>
 
   </div>
@@ -98,85 +92,461 @@
 <!-- PAYMENT MODAL -->
 <div class="modal" id="paymentModal">
   <div class="modal-box pay-box">
-   <h3 id="planTitle">Pro Plan – Payment</h3>
+    <h3 id="planTitle">Payment</h3>
 
-<div class="pay-options">
-  <button class="pay-btn" onclick="selectPayment('upi')">
-    <img src="assets/images/upi.png"> UPI
-  </button>
+    <div class="pay-options">
+      <button class="pay-btn" onclick="showUPI()">
+        <img src="assets/images/upi.png"> UPI
+      </button>
+      <button class="pay-btn" onclick="showCard()">
+        <img src="assets/images/visa.png">
+        <img src="assets/images/mastercard.png">
+        <img src="assets/images/rupay.png">
+        Card
+      </button>
+      <button class="pay-btn" onclick="showQR()">
+        <img src="assets/images/qr.png"> QR
+      </button>
+    </div>
 
-  <button class="pay-btn" onclick="selectPayment('card')">
-    <img src="assets/images/visa.png">
-    <img src="assets/images/mastercard.png">
-    <img src="assets/images/rupay.png">
-    Card
-  </button>
+    <div id="upiBox" class="pay-demo">
+      <input class="pay-input" id="upiId" placeholder="example@upi">
+      <input class="pay-input" id="upiPin" type="password" placeholder="UPI PIN">
+      <button class="mini-btn" onclick="payUPI()">Pay</button>
+    </div>
 
-  <button class="pay-btn" onclick="selectPayment('qr')">
-    <img src="assets/images/qr.png"> QR / Barcode
-  </button>
+    <div id="cardBox" class="pay-demo" style="display:none;">
+      <input class="pay-input" id="cardNumber" placeholder="Card Number">
+      <input class="pay-input" id="expiry" placeholder="MM/YY">
+      <input class="pay-input" id="cvv" type="password" placeholder="CVV">
+      <button class="mini-btn" onclick="payCard()">Pay</button>
+    </div>
+
+    <div id="qrBox" class="pay-demo" style="display:none;">
+      <img src="assets/images/qr.png" class="qr-img">
+      <p>Scan the QR using any UPI app</p>
+      <button class="mini-btn" onclick="confirmQR()">I have paid</button>
+    </div>
+
+    <button class="mini-btn outline" onclick="closePayment(); clearPaymentFields()">Close</button>
+  </div>
 </div>
 
-<div id="paymentArea" class="pay-demo">
-  <p>Select a payment method to continue.</p>
-</div>
-
-<button class="mini-btn" onclick="closePayment()">Close</button>
-</div>
-</div>
-<!-- FREE PLAN MODAL -->
+<!-- FREE MODAL -->
 <div class="modal" id="freeModal">
-  <div class="modal-box pay-box">
+  <div class="modal-box">
     <h3>🎉 Free Plan Activated</h3>
-
-    <p style="margin: 10px 0;">
-      You can start using Pep immediately with the Free plan.
-    </p>
-
-    <ul style="text-align:left; margin: 15px 0;">
-      <li>✔ Basic Messaging</li>
-      <li>✔ Limited AI Replies</li>
-      <li>✔ Community Support</li>
-    </ul>
-
+    <p>You can start using Pep immediately.</p>
     <button class="mini-btn" onclick="closeFree()">Continue</button>
   </div>
 </div>
 
-<!-- JAVASCRIPT (FULLY WORKING) -->
-
-<script src="js/payment.js"></script>
+<!-- AUTH MODAL -->
 <div class="auth-overlay" id="authOverlay">
-
   <div class="auth-card">
-  <form id="authForm" onsubmit="handleCreateAccount(event)">
 
-    <!-- Close button -->
     <span class="auth-close" onclick="closeAuthModal()">×</span>
-
-    <!-- Logo -->
     <div class="auth-logo">Pep</div>
 
-    <h2>Create Account</h2>
+    <!-- SIGNUP -->
+    <form id="signupForm" onsubmit="handleSignup(event)">
+      <h2>Create Account</h2>
+      <input type="text" id="signupName" placeholder="Name" required>
+      <input type="email" id="signupEmail" placeholder="Email" required>
+      <input type="password" placeholder="Password" required>
+      <button class="btn-primary auth-btn">Create Account</button>
+      <p class="auth-switch">
+        Already have an account?
+        <span onclick="showLogin()">Login</span>
+      </p>
+    </form>
 
-    <input type="text" id="name" placeholder="Name" required>
-    <input type="email" id="email" placeholder="Email" required>
-    <input type="password" id="password" placeholder="Password" required>
+    <!-- LOGIN -->
+    <form id="loginForm" style="display:none;" onsubmit="handleLogin(event)">
+      <h2>Login</h2>
+      <input type="email" id="loginEmail" placeholder="Email" required>
+      <input type="password" placeholder="Password" required>
+      <button class="btn-primary auth-btn">Login</button>
+      <p class="auth-switch">
+        New to Pep?
+        <span onclick="showSignup()">Create Account</span>
+      </p>
+    </form>
 
-    <button class="btn-primary auth-btn" type="submit">
-      Create Account
-    </button>
-
-  </form>
+  </div>
 </div>
-</div>
+
+<!-- ================= JS ================= -->
 <script>
-function openAuthModal() {
-  document.getElementById("authOverlay").style.display = "flex";
+/* AUTH UI */
+function openAuthModal(){ authOverlay.style.display="flex"; }
+function closeAuthModal(){ authOverlay.style.display="none"; }
+function showLogin(){ signupForm.style.display="none"; loginForm.style.display="block"; }
+function showSignup(){ loginForm.style.display="none"; signupForm.style.display="block"; }
+
+/* USER DB */
+function saveUser(name,email){
+  const users=JSON.parse(localStorage.getItem("pepSession"))||{};
+  users[email]={name,email};
+  localStorage.setItem("pepSession",JSON.stringify(users));
 }
-function closeAuthModal() {
-  document.getElementById("authOverlay").style.display = "none";
+function getUser(email){
+  const users=JSON.parse(localStorage.getItem("pepSession"))||{};
+  return users[email];
 }
+
+/* SESSION */
+function startSession(user) {
+  const sessionUser = {
+    name: user.name,
+    email: user.email,
+     phone: user.phone || "",
+    loggedIn: true
+  };
+
+  localStorage.setItem("pepSession", JSON.stringify(sessionUser));
+}
+
+function getSession(){
+  return JSON.parse(localStorage.getItem("pepSession"));
+}
+function endSession(){
+  localStorage.removeItem("pepSession");
+  const initial = document.getElementById("profileInitial");
+  if (initial) initial.innerText = "";
+  location.reload();
+}
+
+/* SIGNUP */
+function handleSignup(e) {
+  e.preventDefault();
+
+  const name = signupName.value.trim();
+  const email = signupEmail.value.trim();
+
+  if (!name || !email) {
+    alert("Please fill all fields");
+    return;
+  }
+
+  // 1️⃣ Load existing users
+  const users = JSON.parse(localStorage.getItem("pepUsers")) || {};
+
+  // 2️⃣ Prevent duplicate signup
+  if (users[email]) {
+    alert("Account already exists. Please login.");
+    showLogin();
+    return;
+  }
+
+  // 3️⃣ Save user permanently
+  users[email] = {
+    name: name,
+    email: email,
+    plan: "Free"
+  };
+
+  localStorage.setItem("pepUsers", JSON.stringify(users));
+
+  // 4️⃣ Start login session
+  localStorage.setItem(
+    "pepSession",
+    JSON.stringify({
+      name: name,
+      email: email,
+      plan: "Free",
+      loggedIn: true
+    })
+  );
+
+  closeAuthModal();
+  location.reload();
+}
+
+/* LOGIN */
+function handleLogin(e) {
+  e.preventDefault();
+
+  const email = loginEmail.value.trim();
+  const users = JSON.parse(localStorage.getItem("pepUsers")) || {};
+  const user = users[email];
+
+  if (!user) {
+    alert("Account not found. Please signup first.");
+    return;
+  }
+
+  localStorage.setItem(
+    "pepSession",
+    JSON.stringify({
+      name: user.name,
+      email: user.email,
+      plan: user.plan || "Free",
+      loggedIn: true
+    })
+  );
+
+  closeAuthModal();
+  location.reload();
+}
+
+function renderNavbarAuth() {
+  const user = getSession();
+  const navArea = document.getElementById("navAuthArea");
+
+  if (!navArea) return;
+
+  if (!user || !user.loggedIn) {
+    navArea.innerHTML = `
+      <button class="btn-primary" onclick="openAuthModal()">
+        Get Started
+      </button>
+    `;
+    return;
+  }
+
+  navArea.innerHTML = `
+    <button class="mini-btn logout-btn" onclick="endSession()">Logout</button>
+`;
+}
+
+document.addEventListener("DOMContentLoaded", renderNavbarAuth);
+
+/* PAYMENT */
+function openPayment(plan) {
+  const user = JSON.parse(localStorage.getItem("pepSession"));
+
+  if (!user) {
+    alert("Please login to continue");
+    openAuthModal();
+    return;
+  }
+
+  user.pendingPlan = plan; // <-- REAL USER CHOICE
+  localStorage.setItem("pepSession", JSON.stringify(user));
+
+  planTitle.innerText = plan + " Plan – Payment";
+  paymentModal.style.display = "flex";
+  showUPI();
+}
+
+function closePayment(){ paymentModal.style.display="none"; }
+function openFree(){ freeModal.style.display="flex"; }
+function closeFree(){ freeModal.style.display="none"; }
+function showOnly(id){ document.querySelectorAll(".pay-demo").forEach(e=>e.style.display="none"); document.getElementById(id).style.display="block"; }
+function showUPI(){ showOnly("upiBox"); }
+function showCard(){ showOnly("cardBox"); }
+function showQR(){ showOnly("qrBox"); }
+function payUPI(){ if(!upiId.value.includes("@")||!/^\d{4,6}$/.test(upiPin.value)){ alert("Invalid UPI"); return;} success(); }
+function payCard(){ if(cardNumber.value.length!==16||cvv.value.length!==3){ alert("Invalid Card"); return;} success(); }
+function confirmQR(){ success(); }
+function success() {
+  const user = JSON.parse(localStorage.getItem("pepSession"));
+  if (!user || !user.pendingPlan) return;
+
+  user.plan = user.pendingPlan;   // ✅ NOW upgrade
+  delete user.pendingPlan;
+
+  localStorage.setItem("pepSession", JSON.stringify(user));
+
+  alert("✅ Payment Successful");
+  closePayment();
+  clearPaymentFields();
+}
+function clearPaymentFields(){ ["upiId","upiPin","cardNumber","cvv","expiry"].forEach(id=>{const e=document.getElementById(id); if(e)e.value="";}); }
+
+/* BACK */
+function goBack(){
+  if (document.referrer) history.back();
+   else window.location.href="index.html"; }
+</script>
+<!-- USER SIDEBAR -->
+<div id="sidebarOverlay" class="sidebar-overlay" onclick="closeSidebar()"></div>
+<aside id="userSidebar" class="user-sidebar">
+  <button class="sidebar-close" onclick="closeSidebar()">✕</button>
+
+  <div class="sidebar-profile">
+    <div class="profile-circle">
+    <div class="profile-initial" id="profileInitial"></div>
+    </div>
+    <div class="profile-info">
+      <h4 id="sidebarName">User</h4>
+      <p id="sidebarEmail">user@email.com</p>
+      <p id="sidebarPlan"></p>
+    </div>
+  </div>
+
+  <div class="sidebar-menu modern">
+
+  <!-- Search -->
+ <input type="text" placeholder="Search…" id="sidebarSearch" />
+
+
+  <nav class="sidebar-nav">
+
+    <p class="nav-title">Account</p>
+    <a onclick="openProfile()">📝 Edit Profile</a>
+    <a onclick="openSettings()">⚙️ Settings</a>
+
+    <p class="nav-title">Support</p>
+    <a onclick="openTicketHistory()">📩 My Tickets</a>
+    <a onclick="openSupport()">➕ Raise Ticket</a>
+
+    <p class="nav-title">Preferences</p>
+    <a onclick="toggleTheme()">🎨 Theme</a>
+<a class="sidebar-link notification-link" onclick="openNotifications()">
+  <span class="icon">🔔</span>
+  <span class="text">Notifications</span>
+  <span class="notif-badge" id="notifCount">3</span>
+</a>
+
+
+    <p class="nav-title">Help</p>
+<a href="help.html">❓ Help Center</a>
+
+  </nav>
+</div>
+
+  <div class="sidebar-footer">
+    <button class="logout-btn" onclick="endSession()">🚪 Log Out</button>
+  </div>
+</div>
+
+<div id="sidebarOverlay" class="sidebar-overlay" onclick="closeSidebar()"></div>
+<button class="modal-close" onclick="closeActiveModal()">✕</button>
+
+<div class="modal" id="profileModal">
+<div class="modal-box support-modal" id="sidebarContent">
+    <h3>Edit Profile</h3>
+
+    <input id="editName" class="support-input" placeholder="Name">
+    <input id="editEmail" class="support-input" placeholder="Email">
+    <input id="editPhone" class="support-input" placeholder="Phone Number">
+
+    <div class="modal-actions">
+      <button class="mini-btn" onclick="saveProfile()">Save</button>
+      <button class="mini-btn outline" onclick="closeProfile()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function renderNotifications() {
+  list.innerHTML = "";
+
+  if (!notifications.length) {
+    list.innerHTML = `
+      <div class="empty-state">
+        🎉 You're all caught up<br>
+        <small>No new notifications</small>
+      </div>
+    `;
+    return;
+  }
+
+  notifications.forEach(n => {
+    const item = document.createElement("div");
+    item.className = "notification-item";
+    item.innerHTML = `
+      ${n.text}<br>
+      <span>${n.time}</span>
+    `;
+    list.appendChild(item);
+  });
+}
+
+btn?.addEventListener("click", (e) => {
+  e.stopPropagation();
+  panel.classList.toggle("hidden");
+  renderNotifications();
+  badge.style.display = "none";
+});
+
+document.addEventListener("click", (e) => {
+  if (!panel.contains(e.target) && !btn.contains(e.target)) {
+    panel.classList.add("hidden");
+  }
+});
+</script>
+<script src="js/appState.js"></script>
+<script src="js/sidebar.js"></script>
+<script src="js/session.js"></script>
+
+<!-- NOTIFICATIONS MODAL -->
+ <button class="modal-close" onclick="closeActiveModal()">✕</button>
+
+<div class="modal" id="notificationModal">
+  <div class="modal-box support-modal">
+    <h3>Notifications</h3>
+    <p class="sub-text">Your recent activity</p>
+
+    <div id="notificationList" class="notification-list"></div>
+
+    <div class="modal-actions">
+      <button class="mini-btn outline" onclick="closeNotifications()">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- NOTIFICATIONS SCRIPT -->
+<script>
+const notifications = [
+  { text: "Welcome to Pep 🎉", time: "Just now" },
+  { text: "Account created successfully", time: "Today" },
+  { text: "Check Settings to customize", time: "Today" }
+];
+
+
+
+function updateNotificationBadge() {
+  const badge = document.getElementById("notifCount");
+  if (!badge) return;
+
+  const notifications = [
+    { text: "Welcome to Pep 🎉", time: "Just now" },
+    { text: "Account created successfully", time: "Today" },
+    { text: "Check Settings to customize", time: "Today" }
+  ];
+
+  if (notifications.length > 0 && !isNotificationsRead()) {
+    badge.style.display = "inline-flex";
+    badge.innerText = notifications.length;
+  } else {
+    badge.style.display = "none";
+  }
+}
+
+
+function openNotifications() {
+  markNotificationsRead();        // ✅ persist read state
+  updateNotificationBadge();
+  renderNotifications();
+  document.getElementById("notificationModal").style.display = "flex";
+}
+
+
+function closeNotifications() {
+  document.getElementById("notificationModal").style.display = "none";
+}
+
+function renderNotifications() {
+  const list = document.getElementById("notificationList");
+  if (!list) return;
+
+  list.innerHTML = "";
+
+  notifications.forEach(n => {
+    const div = document.createElement("div");
+    div.className = "notification-item";
+    div.innerHTML = `
+      <strong>${n.text}</strong>
+      <span>${n.time}</span>
+    `;
+    list.appendChild(div);
+  });
+}
+
+document.addEventListener("DOMContentLoaded", updateNotificationBadge);
 </script>
 
 </body>

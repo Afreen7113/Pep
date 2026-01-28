@@ -1,94 +1,459 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pep – Connect. Grow. Share.</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pep – Connect. Grow. Share.</title>
 
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
-    <!-- Navbar -->
-    <header class="navbar">
-        <div class="logo-wrapper">
-    <span class="logo">Pep</span>
-</div>
+<button class="back-btn" onclick="goBack()">←</button>
 
-        <nav>
-            <a href="index.html" class="active">Home</a>
-            <a href="features.html">Features</a>
-            <a href="pricing.html">Pricing</a>
-            <a href="support.html">Support</a>
-        </nav>
-        <button class="btn-primary" onclick="openAuthModal()">
-  Get Started
-</button>
+<!-- NAVBAR -->
+<header class="navbar">
+  <div class="nav-left">
+    <!-- HAMBURGER -->
+    <button class="hamburger-btn" onclick="openSidebar()">☰</button>
 
+    <!-- LOGO -->
+    <div class="logo-wrapper">
+      <span class="logo">Pep</span>
+    </div>
+  </div>
+
+
+  <nav>
+    <a href="index.html" class="active">Home</a>
+    <a href="features.html">Features</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="support.html">Support</a>
+  </nav>
+
+  <!-- AUTH AREA -->
+  <div id="navAuthArea">
+    <button class="btn-primary" onclick="openAuthModal()">Get Started</button>
+  </div>
 </header>
 
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <img src="assets/images/chat-ui.png" alt="Chat UI" class="chat-ui">
+  </div>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-left">
-            <img src="assets/images/chat-ui.png" alt="Chat UI" class="chat-ui">
-        </div>
+  <div class="hero-right">
+    <h1 class="hero-title">
+      <span class="line connect">Connect.</span>
+      <span class="line grow">Grow.</span>
+      <span class="line share">Share.</span>
+    </h1>
 
-        <div class="hero-right">
-            <h1 class="hero-title">
-               <span class="line connect">Connect.</span>
-               <span class="line grow">Grow.</span>
-               <span class="line share">Share.</span>
-            </h1>
-            <p class="hero-desc">
-                Pep is a messaging app that uses the latest AI technology.
-                Using AI technology, Pep can predict and use a unique tone
-                for messages that are of importance to you.
-            </p>
+    <p class="hero-desc">
+      Pep is a messaging app that uses the latest AI technology.
+      Using AI technology, Pep can predict and use a unique tone
+      for messages that are of importance to you.
+    </p>
 
-            <div class="store-buttons">
-                <div class="store-btn">
-                <img src="assets/images/apple-store.png" 
-                     alt="Apple Store" 
-                     class="apple-badge"
-                     onclick="goToApple()">
-                </div>
-                <div class="store-btn">
-                <img src="assets/images/google-play.png" 
-                     alt="Google Play"
-                     class="google-badge"
-                     onclick="goToGoogle()">
-                </div>     
-            </div>
-        </div>
-    </section>
+    <div class="store-buttons">
+
+  <!-- Apple App Store -->
+  <a
+    href="https://www.apple.com/app-store/"
+    target="_blank"
+    class="store-btn"
+    aria-label="Download on the App Store"
+  >
+    <img
+      src="assets/images/apple-store.png"
+      alt="Download on the App Store"
+      class="apple-badge"
+    >
+  </a>
+
+  <!-- Google Play Store -->
+  <a
+    href="https://play.google.com/store"
+    target="_blank"
+    class="store-btn"
+    aria-label="Get it on Google Play"
+  >
+    <img
+      src="assets/images/google-play.png"
+      alt="Get it on Google Play"
+      class="google-badge"
+    >
+  </a>
+
+</div>
+
+  </div>
+</section>
+
 <!-- AUTH MODAL -->
 <div class="auth-overlay" id="authOverlay">
-
   <div class="auth-card">
-  <form id="authForm" onsubmit="handleCreateAccount(event)">
 
-    <!-- Close button -->
     <span class="auth-close" onclick="closeAuthModal()">×</span>
-
-    <!-- Logo -->
     <div class="auth-logo">Pep</div>
 
-    <h2>Create Account</h2>
+    <!-- SIGNUP -->
+    <form id="signupForm" onsubmit="handleSignup(event)">
+      <h2>Create Account</h2>
 
-    <input type="text" id="name" placeholder="Name" required>
-    <input type="email" id="email" placeholder="Email" required>
-    <input type="password" id="password" placeholder="Password" required>
+      <input type="text" id="signupName" placeholder="Name" required>
+      <input type="email" id="signupEmail" placeholder="Email" required>
+      <input type="password" placeholder="Password" required>
 
-    <button class="btn-primary auth-btn" type="submit">
-      Create Account
-    </button>
+      <button class="btn-primary auth-btn">Create Account</button>
 
-  </form>
+      <p class="auth-switch">
+        Already have an account?
+        <span onclick="showLogin()">Login</span>
+      </p>
+    </form>
+
+    <!-- LOGIN -->
+    <form id="loginForm" style="display:none;" onsubmit="handleLogin(event)">
+      <h2>Login</h2>
+
+      <input type="email" id="loginEmail" placeholder="Email" required>
+      <input type="password" placeholder="Password" required>
+
+      <button class="btn-primary auth-btn">Login</button>
+
+      <p class="auth-switch">
+        New to Pep?
+        <span onclick="showSignup()">Create Account</span>
+      </p>
+    </form>
+
+  </div>
 </div>
+
+
+<script>
+/* ---------- MODAL ---------- */
+function openAuthModal() {
+  document.getElementById("authOverlay").style.display = "flex";
+}
+function closeAuthModal() {
+  document.getElementById("authOverlay").style.display = "none";
+}
+function showLogin() {
+  signupForm.style.display = "none";
+  loginForm.style.display = "block";
+}
+function showSignup() {
+  loginForm.style.display = "none";
+  signupForm.style.display = "block";
+}
+
+/* ---------- USER DATABASE ---------- */
+function saveUser(name, email) {
+  const users = JSON.parse(localStorage.getItem("pepSession")) || {};
+  users[email] = { name, email };
+  localStorage.setItem("pepSession", JSON.stringify(users));
+}
+
+function getUser(email) {
+  const users = JSON.parse(localStorage.getItem("pepSession")) || {};
+  return users[email];
+}
+
+/* ---------- SESSION ---------- */
+function startSession(user) {
+  const sessionUser = {
+    name: user.name,
+    email: user.email,
+     phone: user.phone || "",
+    loggedIn: true
+  };
+
+  localStorage.setItem("pepSession", JSON.stringify(sessionUser));
+}
+
+
+function getSession() {
+  return JSON.parse(localStorage.getItem("pepSession"));
+}
+
+function endSession() {
+  localStorage.removeItem("pepSession");
+  const initial = document.getElementById("profileInitial");
+  if (initial) initial.innerText = "";
+  location.reload();
+}
+
+/* ---------- SIGNUP ---------- */
+function handleSignup(e) {
+  e.preventDefault();
+
+  const name = signupName.value.trim();
+  const email = signupEmail.value.trim();
+
+  if (!name || !email) {
+    alert("Please fill all fields");
+    return;
+  }
+
+  // 1️⃣ Load existing users
+  const users = JSON.parse(localStorage.getItem("pepUsers")) || {};
+
+  // 2️⃣ Prevent duplicate signup
+  if (users[email]) {
+    alert("Account already exists. Please login.");
+    showLogin();
+    return;
+  }
+
+  // 3️⃣ Save user permanently
+  users[email] = {
+    name: name,
+    email: email,
+    plan: "Free"
+  };
+
+  localStorage.setItem("pepUsers", JSON.stringify(users));
+
+  // 4️⃣ Start login session
+  localStorage.setItem(
+    "pepSession",
+    JSON.stringify({
+      name: name,
+      email: email,
+      plan: "Free",
+      loggedIn: true
+    })
+  );
+
+  closeAuthModal();
+  location.reload();
+}
+
+
+
+/* ---------- LOGIN ---------- */
+function handleLogin(e) {
+  e.preventDefault();
+
+  const email = loginEmail.value.trim();
+  const users = JSON.parse(localStorage.getItem("pepUsers")) || {};
+  const user = users[email];
+
+  if (!user) {
+    alert("Account not found. Please signup first.");
+    return;
+  }
+
+  localStorage.setItem(
+    "pepSession",
+    JSON.stringify({
+      name: user.name,
+      email: user.email,
+      plan: user.plan || "Free",
+      loggedIn: true
+    })
+  );
+
+  closeAuthModal();
+  location.reload();
+}
+
+
+function renderNavbarAuth() {
+  const user = getSession();
+  const navArea = document.getElementById("navAuthArea");
+
+  if (!navArea) return;
+
+  if (!user || !user.loggedIn) {
+    navArea.innerHTML = `
+      <button class="btn-primary" onclick="openAuthModal()">
+        Get Started
+      </button>
+    `;
+    return;
+  }
+
+  navArea.innerHTML = `
+    <button class="mini-btn logout-btn" onclick="endSession()">Logout</button>
+`;
+}
+
+document.addEventListener("DOMContentLoaded", renderNavbarAuth);
+
+
+/* ---------- BACK BUTTON ---------- */
+function goBack() {
+  if (document.referrer) history.back();
+ else window.location.href = "index.html";
+}
+document.addEventListener("DOMContentLoaded", () => {
+  const backBtn = document.querySelector(".back-btn");
+  if (backBtn) backBtn.style.display = "none";
+});
+</script>
+<!-- USER SIDEBAR -->
+<div id="sidebarOverlay" class="sidebar-overlay" onclick="closeSidebar()"></div>
+<aside id="userSidebar" class="user-sidebar">
+  <button class="sidebar-close" onclick="closeSidebar()">✕</button>
+
+  <div class="sidebar-profile">
+    <div class="profile-circle">
+    <div class="profile-initial" id="profileInitial"></div>
+    </div>
+    <div class="profile-info">
+      <h4 id="sidebarName">User</h4>
+      <p id="sidebarEmail">user@email.com</p>
+      <p id="sidebarPlan"></p>
+    </div>
+  </div>
+
+  <div class="sidebar-menu modern">
+
+  <!-- Search -->
+  <input
+  type="text"
+  id="sidebarSearch"
+  placeholder="Search..."
+  onkeydown="handleSidebarSearch(event)"
+/>
+
+  <nav class="sidebar-nav">
+
+    <p class="nav-title">Account</p>
+    <a onclick="openProfile()">📝 Edit Profile</a>
+    <a onclick="openSettings()">⚙️ Settings</a>
+
+    <p class="nav-title">Support</p>
+    <a onclick="openTicketHistory()">📩 My Tickets</a>
+    <a onclick="openSupport()">➕ Raise Ticket</a>
+
+    <p class="nav-title">Preferences</p>
+    <a onclick="toggleTheme()">🎨 Theme</a>
+<a class="sidebar-link notification-link" onclick="openNotifications()">
+  <span class="icon">🔔</span>
+  <span class="text">Notifications</span>
+  <span class="notif-badge" id="notifCount">3</span>
+</a>
+
+
+    <p class="nav-title">Help</p>
+<a href="help.html">❓ Help Center</a>
+
+  </nav>
 </div>
 
-<script src="js/main.js"></script>
+  <div class="sidebar-footer">
+    <button class="logout-btn" onclick="endSession()">🚪 Log Out</button>
+  </div>
+</div>
+
+<div id="sidebarOverlay" class="sidebar-overlay" onclick="closeSidebar()"></div>
+<button class="modal-close" onclick="closeActiveModal()">✕</button>
+
+<div class="modal" id="profileModal">
+<div class="modal-box support-modal" id="sidebarContent">
+    <h3>Edit Profile</h3>
+
+    <input id="editName" class="support-input" placeholder="Name">
+    <input id="editEmail" class="support-input" placeholder="Email">
+    <input id="editPhone" class="support-input" placeholder="Phone Number">
+
+    <div class="modal-actions">
+      <button class="mini-btn" onclick="saveProfile()">Save</button>
+      <button class="mini-btn outline" onclick="closeProfile()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- NOTIFICATIONS MODAL -->
+ <button class="modal-close" onclick="closeActiveModal()">✕</button>
+
+<div class="modal" id="notificationModal">
+  <div class="modal-box support-modal">
+    <h3>Notifications</h3>
+    <p class="sub-text">Your recent activity</p>
+
+    <div id="notificationList" class="notification-list"></div>
+
+    <div class="modal-actions">
+      <button class="mini-btn outline" onclick="closeNotifications()">Close</button>
+    </div>
+  </div>
+</div>
+<script src="js/appState.js"></script>
+<script src="js/sidebar.js"></script>
+<script src="js/session.js"></script>
+
+<!-- NOTIFICATIONS SCRIPT -->
+<script>
+const notifications = [
+  { text: "Welcome to Pep 🎉", time: "Just now" },
+  { text: "Account created successfully", time: "Today" },
+  { text: "Check Settings to customize", time: "Today" }
+];
+
+
+
+function updateNotificationBadge() {
+  const badge = document.getElementById("notifCount");
+  if (!badge) return;
+
+  const notifications = [
+    { text: "Welcome to Pep 🎉", time: "Just now" },
+    { text: "Account created successfully", time: "Today" },
+    { text: "Check Settings to customize", time: "Today" }
+  ];
+
+  if (notifications.length > 0 && !isNotificationsRead()) {
+    badge.style.display = "inline-flex";
+    badge.innerText = notifications.length;
+  } else {
+    badge.style.display = "none";
+  }
+}
+
+function openNotifications() {
+  markNotificationsRead();        // ✅ persist read state
+  updateNotificationBadge();
+  renderNotifications();
+  document.getElementById("notificationModal").style.display = "flex";
+}
+
+
+function closeNotifications() {
+  document.getElementById("notificationModal").style.display = "none";
+}
+
+function renderNotifications() {
+  const list = document.getElementById("notificationList");
+  if (!list) return;
+
+  list.innerHTML = "";
+
+  notifications.forEach(n => {
+    const div = document.createElement("div");
+    div.className = "notification-item";
+    div.innerHTML = `
+      <strong>${n.text}</strong>
+      <span>${n.time}</span>
+    `;
+    list.appendChild(div);
+  });
+}
+
+document.addEventListener("DOMContentLoaded", updateNotificationBadge);
+</script>
+<script src="js/session.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", renderFloatingProfile);
+</script>
+
 </body>
 </html>

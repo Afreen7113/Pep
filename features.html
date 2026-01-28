@@ -5,16 +5,22 @@
   <title>Features – Pep</title>
   <link rel="stylesheet" href="css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-
 </head>
 
 <body>
 
-<!-- SAME NAVBAR AS HOME -->
+<button class="back-btn" onclick="goBack()">←</button>
 <header class="navbar">
-  <div class="logo-wrapper">
-    <span class="logo" onclick="location.href='index.html'">Pep</span>
+  <div class="nav-left">
+    <!-- HAMBURGER -->
+    <button class="hamburger-btn" onclick="openSidebar()">☰</button>
+
+    <!-- LOGO -->
+    <div class="logo-wrapper">
+      <span class="logo">Pep</span>
+    </div>
   </div>
+
 
   <nav>
     <a href="index.html">Home</a>
@@ -23,86 +29,558 @@
     <a href="support.html">Support</a>
   </nav>
 
-   <button class="btn-primary" onclick="openAuthModal()">
-  Get Started
-</button>
-
+  <!-- AUTH AREA -->
+  <div id="navAuthArea">
+    <button class="btn-primary" onclick="openAuthModal()">Get Started</button>
+  </div>
 </header>
 
-<!-- FEATURES HERO -->
 <section class="features-hero-light">
   <h1>Features of Pep</h1>
   <p>Why users choose Pep for smarter communication</p>
 </section>
 
-<!-- FEATURES GRID -->
 <section class="features-grid-wrap-light">
   <div class="features-grid-light">
+   <div class="feature-card-light" data-feature="smart-reply">
+  <h3>AI Smart Reply</h3>
+  <p>Instant intelligent replies.</p>
+</div>
 
-    <div class="feature-card-light">
-      <h3>AI Smart Reply</h3>
-      <p>Instant intelligent replies based on conversation context.</p>
-    </div>
+<div class="feature-card-light" data-feature="time-saving">
+  <h3>Time Saving</h3>
+  <p>Automated actions save time.</p>
+</div>
 
-    <div class="feature-card-light">
-      <h3>Time Saving</h3>
-      <p>Automated actions reduce repetitive tasks and save time.</p>
-    </div>
+<div class="feature-card-light" data-feature="focus">
+  <h3>Better Focus</h3>
+  <p>Important messages highlighted.</p>
+</div>
 
-    <div class="feature-card-light">
-      <h3>Better Focus</h3>
-      <p>Important messages are highlighted automatically.</p>
-    </div>
+<div class="feature-card-light" data-feature="collaboration">
+<a href="pricing.html" class="feature-badge team" title="Upgrade to Team">
+  Team
+</a>
+  <h3>Collaboration</h3>
+  <p>Real-time shared conversations.</p>
+</div>
 
-    <div class="feature-card-light">
-      <h3>Seamless Collaboration</h3>
-      <p>Stay aligned with real-time updates and shared conversations.</p>
-    </div>
+<div class="feature-card-light" data-feature="insights">
+<a href="pricing.html" class="feature-badge pro" title="Upgrade to Pro">
+  Pro
+</a>
+  <h3>AI Insights</h3>
+  <p>Smart communication suggestions.</p>
+</div>
 
-    <div class="feature-card-light">
-      <h3>AI Insights</h3>
-      <p>Smart suggestions help you communicate better every day.</p>
-    </div>
-
-    <div class="feature-card-light">
-      <h3>Secure Messaging</h3>
-      <p>End-to-end encrypted chats for complete privacy.</p>
-    </div>
+<div class="feature-card-light" data-feature="security">
+<a href="pricing.html" class="feature-badge pro" title="Upgrade to Pro">
+  Pro
+</a>
+  <h3>Secure Messaging</h3>
+  <p>End-to-end encrypted chats.</p>
+</div>
 
   </div>
 </section>
+
+<!-- AUTH MODAL -->
 <div class="auth-overlay" id="authOverlay">
-
   <div class="auth-card">
-  <form id="authForm" onsubmit="handleCreateAccount(event)">
 
-    <!-- Close button -->
     <span class="auth-close" onclick="closeAuthModal()">×</span>
-
-    <!-- Logo -->
     <div class="auth-logo">Pep</div>
 
-    <h2>Create Account</h2>
+    <!-- SIGNUP -->
+    <form id="signupForm">
+      <h2>Create Account</h2>
+      <input type="text" id="signupName" placeholder="Name" required>
+      <input type="email" id="signupEmail" placeholder="Email" required>
+      <input type="password" placeholder="Password" required>
 
-    <input type="text" id="name" placeholder="Name" required>
-    <input type="email" id="email" placeholder="Email" required>
-    <input type="password" id="password" placeholder="Password" required>
+      <button class="btn-primary auth-btn">Create Account</button>
 
-    <button class="btn-primary auth-btn" type="submit">
-      Create Account
-    </button>
+      <p class="auth-switch">
+        Already have an account?
+        <span onclick="showLogin()">Login</span>
+      </p>
+    </form>
 
-  </form>
+    <!-- LOGIN -->
+    <form id="loginForm" style="display:none;">
+      <h2>Login</h2>
+      <input type="email" id="loginEmail" placeholder="Email" required>
+      <input type="password" placeholder="Password" required>
+
+      <button class="btn-primary auth-btn">Login</button>
+
+      <p class="auth-switch">
+        New to Pep?
+        <span onclick="showSignup()">Create Account</span>
+      </p>
+    </form>
+
+  </div>
 </div>
-</div>
+
+<!-- =================== JAVASCRIPT =================== -->
 <script>
-function openAuthModal() {
-  document.getElementById("authOverlay").style.display = "flex";
+/* ---------- ELEMENTS ---------- */
+const authOverlay = document.getElementById("authOverlay");
+const signupForm = document.getElementById("signupForm");
+const loginForm = document.getElementById("loginForm");
+const navAuthArea = document.getElementById("navAuthArea");
+
+/* ---------- AUTH UI ---------- */
+function openAuthModal() { authOverlay.style.display = "flex"; }
+function closeAuthModal() { authOverlay.style.display = "none"; }
+
+function showLogin() {
+  signupForm.style.display = "none";
+  loginForm.style.display = "block";
 }
-function closeAuthModal() {
-  document.getElementById("authOverlay").style.display = "none";
+
+function showSignup() {
+  loginForm.style.display = "none";
+  signupForm.style.display = "block";
+}
+
+/* ---------- USER STORE ---------- */
+function saveUser(name, email) {
+  const users = JSON.parse(localStorage.getItem("pepSession")) || {};
+  users[email] = { name, email };
+  localStorage.setItem("pepSession", JSON.stringify(users));
+}
+
+function getUserByEmail(email) {
+  const users = JSON.parse(localStorage.getItem("pepSession")) || {};
+  return users[email] || null;
+}
+
+/* ---------- SESSION ---------- */
+function startSession(user) {
+  const sessionUser = {
+    name: user.name,
+    email: user.email,
+     phone: user.phone || "",
+    loggedIn: true
+  };
+
+  localStorage.setItem("pepSession", JSON.stringify(sessionUser));
+}
+
+
+function endSession() {
+  localStorage.removeItem("pepSession");
+  const initial = document.getElementById("profileInitial");
+  if (initial) initial.innerText = "";
+  location.reload();
+}
+
+function getSession() {
+  return JSON.parse(localStorage.getItem("pepSession"));
+}
+
+function renderNavbarAuth() {
+  const user = getSession();
+  const navArea = document.getElementById("navAuthArea");
+
+  if (!navArea) return;
+
+  if (!user || !user.loggedIn) {
+    navArea.innerHTML = `
+      <button class="btn-primary" onclick="openAuthModal()">
+        Get Started
+      </button>
+    `;
+    return;
+  }
+
+  navArea.innerHTML = `
+    <button class="mini-btn logout-btn" onclick="endSession()">Logout</button>
+`;
+}
+
+document.addEventListener("DOMContentLoaded", renderNavbarAuth);
+
+
+/* ---------- SIGNUP ---------- */
+signupForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const name = signupName.value.trim();
+  const email = signupEmail.value.trim();
+
+  saveUser(name, email);
+  startSession(name, email);
+  closeAuthModal();
+  location.reload();
+});
+
+/* ---------- LOGIN ---------- */
+loginForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const email = loginEmail.value.trim();
+  const user = getUserByEmail(email);
+
+  if (!user) {
+    alert("Account not found. Please create an account first.");
+    return;
+  }
+
+  startSession(user.name, user.email);
+  closeAuthModal();
+  location.reload();
+});
+function handleSignup(e) {
+  e.preventDefault();
+
+  const name = signupName.value.trim();
+  const email = signupEmail.value.trim();
+
+  if (!name || !email) {
+    alert("Please fill all fields");
+    return;
+  }
+
+  // 1️⃣ Load existing users
+  const users = JSON.parse(localStorage.getItem("pepUsers")) || {};
+
+  // 2️⃣ Prevent duplicate signup
+  if (users[email]) {
+    alert("Account already exists. Please login.");
+    showLogin();
+    return;
+  }
+
+  // 3️⃣ Save user permanently
+  users[email] = {
+    name: name,
+    email: email,
+    plan: "Free"
+  };
+
+  localStorage.setItem("pepUsers", JSON.stringify(users));
+
+  // 4️⃣ Start login session
+  localStorage.setItem(
+    "pepSession",
+    JSON.stringify({
+      name: name,
+      email: email,
+      plan: "Free",
+      loggedIn: true
+    })
+  );
+
+  closeAuthModal();
+  location.reload();
+}
+
+/* ---------- LOGIN ---------- */
+function handleLogin(e) {
+  e.preventDefault();
+
+  const email = loginEmail.value.trim();
+  const users = JSON.parse(localStorage.getItem("pepUsers")) || {};
+  const user = users[email];
+
+  if (!user) {
+    alert("Account not found. Please signup first.");
+    return;
+  }
+
+  localStorage.setItem(
+    "pepSession",
+    JSON.stringify({
+      name: user.name,
+      email: user.email,
+      plan: user.plan || "Free",
+      loggedIn: true
+    })
+  );
+
+  closeAuthModal();
+  location.reload();
+}
+
+/* ---------- BACK ---------- */
+function goBack() {
+  if (document.referrer) history.back();
+ else window.location.href = "index.html";
 }
 </script>
+<!-- USER SIDEBAR -->
+ <div id="sidebarOverlay" class="sidebar-overlay" onclick="closeSidebar()"></div>
+<aside id="userSidebar" class="user-sidebar">
+  <button class="sidebar-close" onclick="closeSidebar()">✕</button>
+
+  <div class="sidebar-profile">
+    <div class="profile-circle">
+    <div class="profile-initial" id="profileInitial"></div>
+    </div>
+    <div class="profile-info">
+      <h4 id="sidebarName">User</h4>
+      <p id="sidebarEmail">user@email.com</p>
+      <p id="sidebarPlan"></p>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+
+  <div class="sidebar-menu modern">
+
+  <!-- Search -->
+  <input
+  type="text"
+  id="sidebarSearch"
+  placeholder="Search..."
+  onkeydown="handleSidebarSearch(event)"
+/>
+  <nav class="sidebar-nav">
+
+    <p class="nav-title">Account</p>
+    <a onclick="openProfile()">📝 Edit Profile</a>
+    <a onclick="openSettings()">⚙️ Settings</a>
+
+    <p class="nav-title">Support</p>
+    <a onclick="openTicketHistory()">📩 My Tickets</a>
+    <a onclick="openSupport()">➕ Raise Ticket</a>
+
+    <p class="nav-title">Preferences</p>
+    <a onclick="toggleTheme()">🎨 Theme</a>
+<a class="sidebar-link notification-link" onclick="openNotifications()">
+  <span class="icon">🔔</span>
+  <span class="text">Notifications</span>
+  <span class="notif-badge" id="notifCount">3</span>
+</a>
+
+
+    <p class="nav-title">Help</p>
+<a href="help.html">❓ Help Center</a>
+
+  </nav>
+</div>
+
+
+</nav>
+
+<div class="sidebar-footer">
+  <button class="logout-link" onclick="endSession()">Log Out</button>
+</div>
+
+</div>
+
+<div id="sidebarOverlay" class="sidebar-overlay" onclick="closeSidebar()"></div>
+<button class="modal-close" onclick="closeActiveModal()">✕</button>
+
+<div class="modal" id="profileModal">
+<div class="modal-box support-modal" id="sidebarContent">
+    <h3>Edit Profile</h3>
+
+    <input id="editName" class="support-input" placeholder="Name">
+    <input id="editEmail" class="support-input" placeholder="Email">
+    <input id="editPhone" class="support-input" placeholder="Phone Number">
+
+    <div class="modal-actions">
+      <button class="mini-btn" onclick="saveProfile()">Save</button>
+      <button class="mini-btn outline" onclick="closeProfile()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script>
+
+
+function renderNotifications() {
+  list.innerHTML = "";
+
+  if (!notifications.length) {
+    list.innerHTML = `
+      <div class="empty-state">
+        🎉 You're all caught up<br>
+        <small>No new notifications</small>
+      </div>
+    `;
+    return;
+  }
+
+  notifications.forEach(n => {
+    const item = document.createElement("div");
+    item.className = "notification-item";
+    item.innerHTML = `
+      ${n.text}<br>
+      <span>${n.time}</span>
+    `;
+    list.appendChild(item);
+  });
+}
+
+btn?.addEventListener("click", (e) => {
+  e.stopPropagation();
+  panel.classList.toggle("hidden");
+  renderNotifications();
+  badge.style.display = "none";
+});
+
+document.addEventListener("click", (e) => {
+  if (!panel.contains(e.target) && !btn.contains(e.target)) {
+    panel.classList.add("hidden");
+  }
+});
+</script>
+<!-- NOTIFICATIONS MODAL -->
+ <button class="modal-close" onclick="closeActiveModal()">✕</button>
+
+<div class="modal" id="notificationModal">
+  <div class="modal-box support-modal">
+    <h3>Notifications</h3>
+    <p class="sub-text">Your recent activity</p>
+
+    <div id="notificationList" class="notification-list"></div>
+
+    <div class="modal-actions">
+      <button class="mini-btn outline" onclick="closeNotifications()">Close</button>
+    </div>
+  </div>
+</div>
+<script src="js/appState.js"></script>
+<script src="js/sidebar.js"></script>
+<script src="js/session.js"></script>
+<script>
+/* FEATURE CONTENT DATA */
+const featureData = {
+  "smart-reply": {
+    title: "AI Smart Reply",
+    desc: "Pep uses AI to understand context and suggest intelligent, tone-aware replies instantly."
+  },
+  "time-saving": {
+    title: "Time Saving",
+    desc: "Automated workflows and quick actions help you save valuable time every day."
+  },
+  "focus": {
+    title: "Better Focus",
+    desc: "Pep highlights important conversations so you never miss what matters."
+  },
+  "collaboration": {
+    title: "Collaboration",
+    desc: "Collaborate seamlessly with teams using shared conversations in real time."
+  },
+  "insights": {
+    title: "AI Insights",
+    desc: "Gain smart insights into your communication patterns and improve efficiency."
+  },
+  "security": {
+    title: "Secure Messaging",
+    desc: "End-to-end encryption ensures all your chats remain private and secure."
+  }
+};
+</script>
+
+<script>
+/* FEATURE INTERACTION */
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".feature-card-light").forEach(card => {
+    card.addEventListener("click", () => {
+      const key = card.dataset.feature;
+      openFeature(key);
+    });
+
+    card.setAttribute("tabindex", "0");
+    card.addEventListener("keydown", e => {
+      if (e.key === "Enter") {
+        openFeature(card.dataset.feature);
+      }
+    });
+  });
+});
+
+function openFeature(key) {
+  const data = featureData[key];
+  if (!data) return;
+
+  document.getElementById("featureTitle").innerText = data.title;
+  document.getElementById("featureDesc").innerText = data.desc;
+  document.getElementById("featureModal").style.display = "flex";
+}
+
+function closeFeature() {
+  document.getElementById("featureModal").style.display = "none";
+}
+</script>
+
+<!-- NOTIFICATIONS SCRIPT -->
+<script>
+const notifications = [
+  { text: "Welcome to Pep 🎉", time: "Just now" },
+  { text: "Account created successfully", time: "Today" },
+  { text: "Check Settings to customize", time: "Today" }
+];
+
+function updateNotificationBadge() {
+  const badge = document.getElementById("notifCount");
+  if (!badge) return;
+
+  const notifications = [
+    { text: "Welcome to Pep 🎉", time: "Just now" },
+    { text: "Account created successfully", time: "Today" },
+    { text: "Check Settings to customize", time: "Today" }
+  ];
+
+  if (notifications.length > 0 && !isNotificationsRead()) {
+    badge.style.display = "inline-flex";
+    badge.innerText = notifications.length;
+  } else {
+    badge.style.display = "none";
+  }
+}
+
+
+function openNotifications() {
+  markNotificationsRead();        // ✅ persist read state
+  updateNotificationBadge();
+  renderNotifications();
+  document.getElementById("notificationModal").style.display = "flex";
+}
+
+
+function closeNotifications() {
+  document.getElementById("notificationModal").style.display = "none";
+}
+
+function renderNotifications() {
+  const list = document.getElementById("notificationList");
+  if (!list) return;
+
+  list.innerHTML = "";
+
+  notifications.forEach(n => {
+    const div = document.createElement("div");
+    div.className = "notification-item";
+    div.innerHTML = `
+      <strong>${n.text}</strong>
+      <span>${n.time}</span>
+    `;
+    list.appendChild(div);
+  });
+}
+
+document.addEventListener("DOMContentLoaded", updateNotificationBadge);
+</script>
+<button class="modal-close" onclick="closeActiveModal()">✕</button>
+
+<div class="modal" id="featureModal">
+  <div class="modal-box support-modal feature-modal">
+    <button class="modal-close" onclick="closeFeature()">✕</button>
+    <h3 id="featureTitle"></h3>
+    <p id="featureDesc"></p>
+
+    <div class="modal-actions">
+      <button class="mini-btn" onclick="closeFeature()">Close</button>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>

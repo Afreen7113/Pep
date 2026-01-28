@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Help Center – Pep</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+</head>
+
+<body class="help-page-active">
+<header class="navbar help-navbar">
+  <div class="nav-left">
+    <button class="hamburger-btn" onclick="openSidebar()">☰</button>
+
+    <div class="logo-wrapper">
+      <span class="logo">Pep</span>
+    </div>
+    
+  </div>
+
+  <!-- TOP CONTROLS -->
+  <button class="back-btn" onclick="goBack()">✕</button>
+</header>
+
+<!-- PAGE WRAPPER -->
+<section class="help-page">
+
+  <!-- HEADER -->
+  <section class="help-hero">
+  <h1>Help Center</h1>
+  <p>Find answers, learn how Pep works, and get support</p>
+    <!-- SEARCH -->
+    <div class="help-search">
+      <input
+        id="helpSearch"
+        type="text"
+        placeholder="Search help articles..."
+        oninput="filterHelp()"
+      >
+    </div>
+  </div>
+
+  <!-- HELP CARDS -->
+  <div class="help-grid">
+
+    <!-- CARD -->
+    <div class="help-card" data-keywords="signup account create free">
+      <h3>🚀 Getting Started</h3>
+
+      <details>
+        <summary>How do I create an account?</summary>
+        <p>Click <strong>Get Started</strong>, enter your email, and create your account.</p>
+      </details>
+
+      <details>
+        <summary>Is Pep free to use?</summary>
+        <p>Yes. Pep offers a Free plan with optional paid upgrades.</p>
+      </details>
+    </div>
+
+    <!-- CARD -->
+    <div class="help-card" data-keywords="profile password login account">
+      <h3>👤 Account</h3>
+
+      <details>
+        <summary>How do I edit my profile?</summary>
+        <p>Open the sidebar → Edit Profile → Save changes.</p>
+      </details>
+
+      <details>
+        <summary>I forgot my password</summary>
+        <p>
+          Click Login → “Forgot Password”.  
+          A reset link will be sent to your registered email.
+        </p>
+        <button class="mini-btn outline" onclick="sendReset()">Send reset email</button>
+      </details>
+    </div>
+
+    <!-- CARD -->
+    <div class="help-card" data-keywords="pricing plan billing upgrade downgrade">
+      <h3>💳 Plans & Billing</h3>
+
+      <details>
+        <summary>How do I upgrade my plan?</summary>
+        <p>Go to Pricing → Choose a plan → Complete payment.</p>
+      </details>
+
+      <details>
+        <summary>Can I downgrade later?</summary>
+        <p>Yes, you can change your plan anytime from Settings.</p>
+      </details>
+    </div>
+
+    <!-- CARD -->
+    <div class="help-card" data-keywords="support ticket response contact">
+      <h3>🛠 Support</h3>
+
+      <details>
+        <summary>How do I raise a support ticket?</summary>
+        <p>Visit the Support page and submit a ticket.</p>
+      </details>
+
+      <details>
+        <summary>How fast is support?</summary>
+        <p>Most tickets are answered within 24 hours.</p>
+      </details>
+    </div>
+
+  </div>
+
+  <!-- CTA -->
+  <section class="help-contact">
+  <h2>Still need help?</h2>
+  <p>Our support team is always ready to assist you</p>
+<button class="btn-primary" onclick="handleContactSupport()">
+  Contact Support
+</button>
+  </div>
+
+</section>
+
+<!-- SIDEBAR + FLOATING PROFILE -->
+<div id="sidebarOverlay" class="sidebar-overlay" onclick="closeSidebar()"></div>
+<aside id="userSidebar" class="user-sidebar">
+  <button class="sidebar-close" onclick="closeSidebar()">✕</button>
+
+  <div class="sidebar-profile">
+    <div class="profile-circle">
+      <div class="profile-initial" id="profileInitial"></div>
+    </div>
+    <div class="profile-info">
+      <h4 id="sidebarName">User</h4>
+      <p id="sidebarEmail">user@email.com</p>
+      <p id="sidebarPlan"></p>
+    </div>
+  </div>
+
+  <div class="sidebar-menu modern">
+    <div class="sidebar-search">
+      <input type="text" placeholder="Search…" />
+    </div>
+
+    <nav class="sidebar-nav">
+      <p class="nav-title">Account</p>
+      <a onclick="openProfile()">📝 Edit Profile</a>
+      <a onclick="openSettings()">⚙️ Settings</a>
+
+      <p class="nav-title">Support</p>
+      <a onclick="openTicketHistory()">📩 My Tickets</a>
+      <a onclick="openSupport()">➕ Raise Ticket</a>
+
+      <p class="nav-title">Preferences</p>
+      <a onclick="toggleTheme()">🎨 Theme</a>
+
+      <a class="sidebar-link notification-link" onclick="openNotifications()">
+        <span class="icon">🔔</span>
+        <span class="text">Notifications</span>
+        <span class="notif-badge" id="notifCount">3</span>
+      </a>
+
+      <p class="nav-title">Help</p>
+      <a href="help.html">❓ Help Center</a>
+    </nav>
+  </div>
+
+  <div class="sidebar-footer">
+    <button class="logout-btn" onclick="endSession()">🚪 Log Out</button>
+  </div>
+</aside>
+
+
+<script src="js/appState.js"></script>
+<script src="js/sidebar.js"></script>
+<script src="js/session.js"></script>
+
+
+<script>
+/* SEARCH FILTER */
+function filterHelp() {
+  const q = helpSearch.value.toLowerCase();
+  document.querySelectorAll(".help-card").forEach(card => {
+    const keys = card.dataset.keywords;
+    card.style.display = keys.includes(q) ? "block" : "none";
+  });
+}
+
+/* PASSWORD RESET (SIMULATED – PROFESSIONAL UX) */
+function sendReset() {
+  const user = JSON.parse(localStorage.getItem("pepSession"));
+  if (!user) {
+    alert("Please login to reset password.");
+    return;
+  }
+
+  alert("🔐 Password reset link sent to " + user.email);
+}
+</script>
+<div class="modal" id="supportModal">
+  <div class="modal-box support-modal">
+    <h3>📩 Contact Support</h3>
+    <p class="sub-text">Tell us how we can help you</p>
+
+    <input id="supportName" class="support-input" placeholder="Your Name" />
+    <input id="supportEmail" class="support-input" placeholder="Email" />
+
+    <textarea
+      id="supportMessage"
+      class="support-input"
+      rows="4"
+      placeholder="Describe your issue clearly..."
+    ></textarea>
+
+    <div class="modal-actions">
+      <button class="mini-btn" onclick="submitSupportTicket()">Submit</button>
+      <button class="mini-btn outline" onclick="closeSupportModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+<!-- AUTH MODAL -->
+<div class="auth-overlay" id="authOverlay">
+  <div class="auth-card">
+
+    <span class="auth-close" onclick="closeAuthModal()">×</span>
+    <div class="auth-logo">Pep</div>
+
+    <!-- SIGNUP -->
+    <form id="signupForm" onsubmit="handleSignup(event)">
+      <h2>Create Account</h2>
+
+      <input type="text" id="signupName" placeholder="Name" required>
+      <input type="email" id="signupEmail" placeholder="Email" required>
+      <input type="password" placeholder="Password" required>
+
+      <button class="btn-primary auth-btn">Create Account</button>
+
+      <p class="auth-switch">
+        Already have an account?
+        <span onclick="showLogin()">Login</span>
+      </p>
+    </form>
+
+    <!-- LOGIN -->
+    <form id="loginForm" style="display:none;" onsubmit="handleLogin(event)">
+      <h2>Login</h2>
+
+      <input type="email" id="loginEmail" placeholder="Email" required>
+      <input type="password" placeholder="Password" required>
+
+      <button class="btn-primary auth-btn">Login</button>
+
+      <p class="auth-switch">
+        New to Pep?
+        <span onclick="showSignup()">Create Account</span>
+      </p>
+    </form>
+
+  </div>
+</div>
+<script>
+/* ---------- MODAL ---------- */
+function openAuthModal() {
+  document.getElementById("authOverlay").style.display = "flex";
+}
+function closeAuthModal() {
+  document.getElementById("authOverlay").style.display = "none";
+}
+function showLogin() {
+  signupForm.style.display = "none";
+  loginForm.style.display = "block";
+}
+function showSignup() {
+  loginForm.style.display = "none";
+  signupForm.style.display = "block";
+}
+function goBack() {
+  if (document.referrer) history.back();
+  else window.location.href = "index.html";
+}
+
+
+/* ---------- USER DATABASE ---------- */
+function saveUser(name, email) {
+  const users = JSON.parse(localStorage.getItem("pepSession")) || {};
+  users[email] = { name, email };
+  localStorage.setItem("pepSession", JSON.stringify(users));
+}
+
+function getUser(email) {
+  const users = JSON.parse(localStorage.getItem("pepSession")) || {};
+  return users[email];
+}
+
+function handleContactSupport() {
+  const user = JSON.parse(localStorage.getItem("pepSession"));
+
+  if (!user || !user.loggedIn) {
+    openAuthModal(); // reuse existing auth modal
+    return;
+  }
+
+  document.getElementById("supportName").value = user.name || "";
+  document.getElementById("supportEmail").value = user.email || "";
+  document.getElementById("supportMessage").value = "";
+
+  document.getElementById("supportModal").style.display = "flex";
+}
+
+function closeSupportModal() {
+  document.getElementById("supportModal").style.display = "none";
+}
+
+function submitSupportTicket() {
+  const user = JSON.parse(localStorage.getItem("pepSession"));
+  const message = document.getElementById("supportMessage").value.trim();
+
+  if (!message) {
+    alert("Please describe your issue");
+    return;
+  }
+
+  const ticket = {
+    id: "TCK-" + Math.floor(Math.random() * 100000),
+    email: user.email,
+    message,
+    date: new Date().toLocaleString(),
+    status: "Open"
+  };
+
+  const tickets = JSON.parse(localStorage.getItem("pepTickets")) || {};
+  tickets[user.email] = tickets[user.email] || [];
+  tickets[user.email].push(ticket);
+
+  localStorage.setItem("pepTickets", JSON.stringify(tickets));
+
+  alert("✅ Support ticket submitted successfully!");
+  closeSupportModal();
+}
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  if (typeof openSidebar !== "function") {
+    console.error("❌ openSidebar() not loaded – check sidebar.js");
+  }
+});
+function isNotificationsRead() {
+  return localStorage.getItem("pepNotificationsRead") === "true";
+}
+
+function markNotificationsRead() {
+  localStorage.setItem("pepNotificationsRead", "true");
+}
+function openNotifications() {
+  markNotificationsRead();
+  updateNotificationBadge();    
+  document.getElementById("notificationModal").style.display = "flex";
+}
+function updateNotificationBadge() {
+  const badge = document.getElementById("notifCount");
+  if (!badge) return;
+
+  const notifications = [
+    { text: "Welcome to Pep 🎉", time: "Just now" },
+    { text: "Account created successfully", time: "Today" },
+    { text: "Check Settings to customize", time: "Today" }
+  ];
+
+  if (notifications.length > 0 && !isNotificationsRead()) {
+    badge.style.display = "inline-flex";
+    badge.innerText = notifications.length;
+  } else {
+    badge.style.display = "none";
+  }
+}
+document.addEventListener("DOMContentLoaded", updateNotificationBadge);
+
+</script>
+
+<div class="modal" id="notificationModal">
+  <div class="modal-box support-modal">
+    <h3>Notifications</h3>
+    <p class="sub-text">Your recent activity</p>
+
+    <div id="notificationList" class="notification-list"></div>
+
+    <div class="modal-actions">
+      <button class="mini-btn outline" onclick="closeNotifications()">Close</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

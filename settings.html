@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Settings – Pep</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<button class="back-btn" onclick="history.back()">←</button>
+<button class="back-btn" style="left:auto;right:18px" onclick="location.href='index.html'">✕</button>
+<header class="navbar">
+  <div class="nav-left">
+    <!-- HAMBURGER -->
+    <button class="hamburger-btn" onclick="openSidebar()">☰</button>
+
+    <!-- LOGO -->
+    <div class="logo-wrapper">
+      <span class="logo">Pep</span>
+    </div>
+  </div>
+
+</header>
+
+<section class="settings-page dark-fix">
+
+  <div class="settings-layout">
+
+    <!-- LEFT NAV -->
+    <aside class="settings-sidebar">
+      <h3 class="settings-title">Settings</h3>
+      <button class="active" onclick="openSection('account',this)">Account</button>
+      <button onclick="openSection('security',this)">Security</button>
+      <button onclick="openSection('billing',this)">Plans & Billing</button>
+      <button onclick="openSection('team',this)">Team</button>
+      <button onclick="openSection('preferences',this)">Preferences</button>
+<button class="danger" onclick="endSession()">Log out</button>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="settings-content">
+
+      <!-- ACCOUNT -->
+      <section id="account" class="settings-section active">
+        <div class="section-header">
+          <div>
+            <h2>Account Settings</h2>
+            <p class="muted">Manage personal information and account status</p>
+          </div>
+          <span class="status-chip success">Active</span>
+        </div>
+
+        <div class="settings-grid">
+          <div class="settings-card">
+            <label>Full Name</label>
+            <input id="setName">
+
+            <label>Email</label>
+            <input id="setEmail" disabled>
+
+            <label>Phone</label>
+            <input id="setPhone">
+
+            <button class="mini-btn" onclick="saveAccount()">Save Changes</button>
+          </div>
+
+          <div class="settings-card light">
+            <h4>Account Summary</h4>
+            <p><strong>Plan:</strong> <span id="currentPlan"></span></p>
+            <p><strong>Status:</strong> Active</p>
+            <p><strong>Member Since:</strong> 2025</p>
+            <p><strong>Last Login:</strong> Today</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECURITY -->
+      <section id="security" class="settings-section">
+        <h2>Security</h2>
+        <p class="muted">Control access and authentication</p>
+
+        <div class="settings-card row">
+          <div>
+            <strong>Password</strong>
+            <p class="muted">Last changed 30 days ago</p>
+          </div>
+<button class="mini-btn outline" onclick="changePassword()">Change</button>
+        </div>
+
+        <div class="settings-card row">
+          <div>
+            <strong>Two-Factor Authentication</strong>
+            <p class="muted">Protect your account with OTP</p>
+          </div>
+<span id="twoFAChip" class="status-chip warning" onclick="toggle2FA()" style="cursor:pointer">
+  Disabled
+</span>
+
+        </div>
+
+        <div class="settings-card row">
+          <div>
+            <strong>Login Activity</strong>
+            <p class="muted">View recent logins</p>
+          </div>
+<button class="mini-btn outline" onclick="viewLogins()">View</button>
+        </div>
+      </section>
+
+      <!-- BILLING -->
+      <section id="billing" class="settings-section">
+        <h2>Plans & Billing</h2>
+        <p class="muted">Subscription & invoices</p>
+
+        <div class="settings-card">
+          <h3 id="planName"></h3>
+          <p class="muted">Billed monthly • Auto-renew enabled</p>
+
+          <div class="settings-actions">
+            <button class="mini-btn" onclick="location.href='pricing.html'">Upgrade</button>
+<button class="mini-btn outline" onclick="viewInvoices()">Invoices</button>
+<button class="mini-btn" onclick="saveSettings()">Save Changes</button>
+  <button class="danger-btn" onclick="deactivateAccount()">Deactivate Account</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- TEAM -->
+      <section id="team" class="settings-section">
+        <h2>Team</h2>
+        <p class="muted">Manage access</p>
+
+        <div class="settings-card row">
+          <div>
+            <strong>Team Members</strong>
+<p class="muted">
+  <span id="teamCount">0</span> active member<span id="teamPlural"></span>
+</p>
+          </div>
+<button class="mini-btn" onclick="openInvite()">
+  <img src="assets/images/whatsapp.png" class="btn-icon">
+  Invite
+    <span class="admin-badge">Admin only</span>
+</button>
+        </div>
+      </section>
+
+      <!-- PREFERENCES -->
+      <section id="preferences" class="settings-section">
+        <h2>Preferences</h2>
+        <p class="muted">Customize experience</p>
+
+        <div class="settings-card row">
+          <div>
+            <strong>Email Notifications</strong>
+            <p class="muted">Product updates & alerts</p>
+          </div>
+          <input type="checkbox" checked>
+        </div>
+
+        <div class="settings-card row">
+          <div>
+            <strong>Data Export</strong>
+            <p class="muted">Download your data</p>
+          </div>
+<button class="mini-btn outline" onclick="exportData()">Export</button>
+        </div>
+
+        <div class="settings-card danger-zone row">
+  <div>
+    <h4>Danger Zone</h4>
+    <p class="muted">This action is irreversible</p>
+  </div>
+
+  <button class="mini-btn outline danger" onclick="deactivateAccount()">
+    Deactivate Account
+  </button>
+</div>
+
+      </section>
+
+    </main>
+  </div>
+</section>
+<button class="modal-close" onclick="closeActiveModal()">✕</button>
+
+<div class="modal" id="inviteModal">
+  <div class="modal-box support-modal">
+    <h3>Invite Team Member</h3>
+    <p class="sub-text">Share invite using one of the options below</p>
+
+    <div class="invite-actions">
+      <button class="mini-btn" onclick="inviteWhatsApp()">WhatsApp</button>
+      <button class="mini-btn outline" onclick="copyInviteLink()">Copy Link</button>
+      <button class="mini-btn outline" onclick="inviteEmail()">Email</button>
+    </div>
+
+    <div class="modal-actions">
+      <button class="mini-btn outline" onclick="closeInvite()">Close</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/session.js"></script>
+<script>
+function openSection(id, btn) {
+  document.querySelectorAll(".settings-section").forEach(s => s.classList.remove("active"));
+  document.querySelectorAll(".settings-sidebar button").forEach(b => b.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  btn.classList.add("active");
+}
+
+function loadSettings() {
+  const user = JSON.parse(localStorage.getItem("pepSession"));
+  if (!user) location.href = "index.html";
+  if (user.twoFA === undefined) {
+    user.twoFA = false;
+    localStorage.setItem("pepSession", JSON.stringify(user));
+  }
+  setName.value = user.name;
+  setEmail.value = user.email;
+  setPhone.value = user.phone || "";
+ const plan = user?.plan?.trim() || "Free";
+
+currentPlan.innerText = plan;
+planName.innerText = `${plan} Plan`;
+
+}
+
+function saveAccount() {
+  const user = JSON.parse(localStorage.getItem("pepSession"));
+  user.name = setName.value.trim();
+  user.phone = setPhone.value.trim();
+  localStorage.setItem("pepSession", JSON.stringify(user));
+  alert("Account updated");
+}
+
+document.addEventListener("DOMContentLoaded", loadSettings);
+</script>
+<script>
+function showModal(title, message) {
+  alert(title + "\n\n" + message);
+}
+
+function changePassword() {
+  showModal(
+    "Change Password",
+    "Password reset link sent to your registered email."
+  );
+}
+
+function toggle2FA() {
+  showModal(
+    "Two-Factor Authentication",
+    "2FA will be available in the next release."
+  );
+}
+function viewLogins() {
+  document.getElementById("loginActivityModal").style.display = "flex";
+}
+
+function closeLoginActivity() {
+  document.getElementById("loginActivityModal").style.display = "none";
+}
+
+function viewInvoices() {
+  showModal(
+    "Invoices",
+    "No invoices available for current plan."
+  );
+}
+
+function inviteMember() {
+  showModal(
+    "Invite Team Member",
+  );
+}
+
+function exportData() {
+  const user = JSON.parse(localStorage.getItem("pepSession"));
+  const blob = new Blob([JSON.stringify(user, null, 2)], { type: "application/json" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "pep-account-data.json";
+  link.click();
+}
+
+function deactivateAccount() {
+  if (confirm("Are you sure you want to deactivate your account?")) {
+    localStorage.removeItem("pepSession");
+    alert("Account deactivated");
+    location.href = "index.html";
+  }
+}
+function endSession() {
+  localStorage.removeItem("pepSession");
+  location.href = "index.html";
+}
+
+function renderTeamMembers() {
+  const user = getSession();
+  if (!user) return;
+
+  let count = 1; // default → logged-in user
+
+  if (user.team && Array.isArray(user.team)) {
+    count = user.team.length;
+  }
+
+  document.getElementById("teamCount").innerText = count;
+  document.getElementById("teamPlural").innerText =
+    count > 1 ? "s" : "";
+}
+
+document.addEventListener("DOMContentLoaded", renderTeamMembers);
+function openInvite() {
+  const btn = event.currentTarget;
+
+  btn.disabled = true;
+  const originalHTML = btn.innerHTML;
+  btn.innerHTML = "Loading...";
+
+  setTimeout(() => {
+    btn.innerHTML = originalHTML;
+    btn.disabled = false;
+    document.getElementById("inviteModal").style.display = "flex";
+  }, 800);
+}
+
+
+function closeInvite() {
+  document.getElementById("inviteModal").style.display = "none";
+}
+
+function getInviteLink() {
+  const user = JSON.parse(localStorage.getItem("pepSession"));
+  return `${location.origin}/signup.html?invite=${encodeURIComponent(user.email)}`;
+}
+
+function inviteWhatsApp() {
+  const link = getInviteLink();
+  const text = `Join my Pep workspace using this link:\n${link}`;
+  window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, "_blank");
+}
+
+function copyInviteLink() {
+  const link = getInviteLink();
+  navigator.clipboard.writeText(link);
+  
+  const btn = event.target;
+  btn.innerText = "Copied ✓";
+  setTimeout(() => (btn.innerText = "Copy Link"), 1500);
+}
+
+function inviteEmail() {
+  const link = getInviteLink();
+  window.location.href = `mailto:?subject=Join me on Pep&body=Join my workspace using this link:%0A${link}`;
+}
+function toggle2FA() {
+  const user = JSON.parse(localStorage.getItem("pepSession"));
+  if (!user) return;
+
+  user.twoFA = !user.twoFA;
+  localStorage.setItem("pepSession", JSON.stringify(user));
+
+  render2FA();
+}
+
+function render2FA() {
+  const user = JSON.parse(localStorage.getItem("pepSession"));
+const chip = document.getElementById("twoFAChip");
+
+  if (!user || !chip) return;
+
+  if (user.twoFA) {
+    chip.innerText = "Enabled";
+    chip.classList.remove("warning");
+    chip.classList.add("success");
+  } else {
+    chip.innerText = "Disabled";
+    chip.classList.remove("success");
+    chip.classList.add("warning");
+  }
+}
+
+document.addEventListener("DOMContentLoaded", render2FA);
+function saveSettings() {
+  const user = JSON.parse(localStorage.getItem("pepSession"));
+  if (!user) return;
+
+  // Simulate billing preferences save
+  user.billingUpdatedAt = new Date().toISOString();
+
+  localStorage.setItem("pepSession", JSON.stringify(user));
+
+  // Professional feedback (not silent)
+  const btn = event.currentTarget;
+  const originalText = btn.innerText;
+
+  btn.innerText = "Saved ✓";
+  btn.disabled = true;
+
+  setTimeout(() => {
+    btn.innerText = originalText;
+    btn.disabled = false;
+  }, 1500);
+}
+
+function enforceInviteAccess() {
+  const user = getSession();
+  if (!user) return;
+
+  const inviteBtn = document.querySelector("button[onclick='openInvite()']");
+  if (!inviteBtn) return;
+
+  const plan = user.plan?.trim() || "Free";
+
+  if (plan === "Free") {
+    inviteBtn.disabled = true;
+    inviteBtn.style.opacity = "0.6";
+    inviteBtn.style.cursor = "not-allowed";
+  }
+}
+
+document.addEventListener("DOMContentLoaded", enforceInviteAccess);
+
+</script>
+<!-- LOGIN ACTIVITY MODAL -->
+ <button class="modal-close" onclick="closeActiveModal()">✕</button>
+
+<div class="modal" id="loginActivityModal">
+  <div class="modal-box support-modal">
+    <h3>Login Activity</h3>
+    <p class="sub-text">Recent logins to your account</p>
+
+    <div class="login-list">
+      <div class="login-item">
+        <strong>Today</strong>
+        <span>Chrome · Windows</span>
+      </div>
+      <div class="login-item">
+        <strong>Yesterday</strong>
+        <span>Edge · Windows</span>
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="mini-btn outline" onclick="closeLoginActivity()">Close</button>
+    </div>
+  </div>
+</div>
+<script src="js/appState.js"></script>
+<script src="js/sidebar.js"></script>
+<script src="js/session.js"></script>
+<!-- NOTIFICATIONS SCRIPT -->
+<script>
+const notifications = [
+  { text: "Welcome to Pep 🎉", time: "Just now" },
+  { text: "Account created successfully", time: "Today" },
+  { text: "Check Settings to customize", time: "Today" }
+];
+
+let notificationsRead = false;
+
+function updateNotificationBadge() {
+  const badge = document.getElementById("notifCount");
+  if (!badge) return;
+
+  const notifications = [
+    { text: "Welcome to Pep 🎉", time: "Just now" },
+    { text: "Account created successfully", time: "Today" },
+    { text: "Check Settings to customize", time: "Today" }
+  ];
+
+  if (notifications.length > 0 && !isNotificationsRead()) {
+    badge.style.display = "inline-flex";
+    badge.innerText = notifications.length;
+  } else {
+    badge.style.display = "none";
+  }
+}
+
+function openNotifications() {
+  markNotificationsRead();        // ✅ persist read state
+  updateNotificationBadge();
+  renderNotifications();
+  document.getElementById("notificationModal").style.display = "flex";
+}
+
+
+function closeNotifications() {
+  document.getElementById("notificationModal").style.display = "none";
+}
+
+function renderNotifications() {
+  const list = document.getElementById("notificationList");
+  if (!list) return;
+
+  list.innerHTML = "";
+
+  notifications.forEach(n => {
+    const div = document.createElement("div");
+    div.className = "notification-item";
+    div.innerHTML = `
+      <strong>${n.text}</strong>
+      <span>${n.time}</span>
+    `;
+    list.appendChild(div);
+  });
+}
+
+document.addEventListener("DOMContentLoaded", updateNotificationBadge);
+</script>
+
+
+<!-- NOTIFICATIONS MODAL -->
+ <button class="modal-close" onclick="closeActiveModal()">✕</button>
+
+<div class="modal" id="notificationModal">
+  <div class="modal-box support-modal">
+    <h3>Notifications</h3>
+    <p class="sub-text">Your recent activity</p>
+
+    <div id="notificationList" class="notification-list"></div>
+
+    <div class="modal-actions">
+      <button class="mini-btn outline" onclick="closeNotifications()">Close</button>
+    </div>
+  </div>
+</div>
+
+</script>
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Tickets – Pep</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+</head>
+
+<body class="tickets-page">
+<button class="dashboard-close-btn" onclick="goBack()">✕</button>
+
+<!-- NAVBAR -->
+<header class="navbar">
+  <div class="nav-left">
+    <!-- HAMBURGER -->
+    <button class="hamburger-btn" onclick="openSidebar()">☰</button>
+
+    <!-- LOGO -->
+    <div class="logo-wrapper">
+      <span class="logo">Pep</span>
+    </div>
+  </div>
+
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="support.html" class="active">Support</a>
+  </nav>
+
+  <button class="mini-btn logout-btn" onclick="logout()">Logout</button>
+</header>
+
+<!-- DASHBOARD -->
+<section class="dashboard-section">
+  <h1 id="welcomeText">Welcome</h1>
+  <p id="userEmail" class="muted"></p>
+
+  <h2 class="ticket-heading">📩 Your Support Tickets</h2>
+
+  <!-- FILTERS -->
+  <div class="ticket-filters">
+    <button class="filter-btn active" onclick="filterTickets('all', this)">All</button>
+    <button class="filter-btn" onclick="filterTickets('Open', this)">Open</button>
+    <button class="filter-btn" onclick="filterTickets('Closed', this)">Closed</button>
+  </div>
+
+  <!-- TICKET LIST -->
+  <div id="ticketContainer"></div>
+</section>
+
+<script>
+/* SESSION */
+const user = JSON.parse(localStorage.getItem("pepSession"));
+if (!user || !user.loggedIn) {
+  location.href = "index.html";
+}
+
+document.getElementById("welcomeText").innerText = `Welcome, ${user.name}`;
+document.getElementById("userEmail").innerText = user.email;
+
+const ticketsData = JSON.parse(localStorage.getItem("pepTickets")) || {};
+let tickets = ticketsData[user.email] || [];
+
+renderTickets(tickets);
+
+/* RENDER */
+function renderTickets(list) {
+  const container = document.getElementById("ticketContainer");
+  container.innerHTML = "";
+
+  if (list.length === 0) {
+    container.innerHTML = "<p class='muted'>No tickets found.</p>";
+    return;
+  }
+
+  list.forEach(ticket => {
+    container.innerHTML += `
+      <div class="ticket-card">
+        <div class="ticket-header">
+          <strong>${ticket.id}</strong>
+          <span class="status ${ticket.status.toLowerCase()}">${ticket.status}</span>
+        </div>
+        <p>${ticket.message}</p>
+        <small>${ticket.date}</small>
+        ${
+          ticket.status === "Open"
+            ? `<button class="mini-btn danger" onclick="closeTicket('${ticket.id}')">Close</button>`
+            : ""
+        }
+      </div>
+    `;
+  });
+}
+
+/* FILTER */
+function filterTickets(status, btn) {
+  document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+
+  if (status === "all") {
+    renderTickets(tickets);
+  } else {
+    renderTickets(tickets.filter(t => t.status === status));
+  }
+}
+
+/* CLOSE TICKET */
+function closeTicket(id) {
+  tickets = tickets.map(t =>
+    t.id === id ? { ...t, status: "Closed" } : t
+  );
+
+  ticketsData[user.email] = tickets;
+  localStorage.setItem("pepTickets", JSON.stringify(ticketsData));
+  renderTickets(tickets);
+}
+
+/* LOGOUT */
+function logout() {
+  localStorage.removeItem("pepSession");
+  location.href = "index.html";
+}
+function openTicketHistory() {
+  const user = JSON.parse(localStorage.getItem("pepSession"));
+  if (!user || !user.loggedIn) {
+    openAuthModal();
+    return;
+  }
+
+  // ✅ Always open dashboard page
+  window.location.href = "dashboard.html";
+}
+
+</script>
+<!-- USER SIDEBAR -->
+<div id="sidebarOverlay" class="sidebar-overlay" onclick="closeSidebar()"></div>
+
+<aside id="userSidebar" class="user-sidebar">
+  <button class="sidebar-close" onclick="closeSidebar()">✕</button>
+
+  <div class="sidebar-profile">
+    <div class="profile-circle">
+      <div class="profile-initial" id="profileInitial"></div>
+    </div>
+    <div class="profile-info">
+      <h4 id="sidebarName">User</h4>
+      <p id="sidebarEmail">user@email.com</p>
+      <p id="sidebarPlan"></p>
+    </div>
+  </div>
+
+  <div class="sidebar-menu modern">
+    <input
+      type="text"
+      id="sidebarSearch"
+      placeholder="Search..."
+      onkeydown="handleSidebarSearch(event)"
+    />
+
+    <nav class="sidebar-nav">
+      <p class="nav-title">Account</p>
+      <a onclick="openProfile()">📝 Edit Profile</a>
+      <a onclick="openSettings()">⚙️ Settings</a>
+
+      <p class="nav-title">Support</p>
+      <a onclick="openTicketHistory()">📩 My Tickets</a>
+      <a onclick="openSupport()">➕ Raise Ticket</a>
+
+      <p class="nav-title">Preferences</p>
+      <a onclick="toggleTheme()">🎨 Theme</a>
+
+      <a class="sidebar-link notification-link" onclick="openNotifications()">
+        🔔 Notifications <span id="notifCount" class="notif-badge">3</span>
+      </a>
+
+      <p class="nav-title">Help</p>
+      <a href="help.html">❓ Help Center</a>
+    </nav>
+  </div>
+
+  <div class="sidebar-footer">
+    <button class="logout-btn" onclick="endSession()">🚪 Log Out</button>
+  </div>
+</aside>
+
+<!-- FLOATING PROFILE -->
+
+<script src="js/appState.js"></script>
+<script src="js/sidebar.js"></script>
+<script src="js/session.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", renderFloatingProfile);
+</script>
+<script>
+function goBack() {
+  if (document.referrer) history.back();
+  else window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>

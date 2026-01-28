@@ -5,83 +5,391 @@
   <title>Support – Pep</title>
   <link rel="stylesheet" href="./css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-
 </head>
 
-<body class="feature-dark">
+<body class="support-page">
 
+
+<button class="back-btn" onclick="goBack()">←</button>
+
+<!-- NAVBAR -->
 <header class="navbar">
+  <div class="nav-left">
+    <!-- HAMBURGER -->
+    <button class="hamburger-btn" onclick="openSidebar()">☰</button>
+
+    <!-- LOGO -->
     <div class="logo-wrapper">
-        <span class="logo">Pep</span>
+      <span class="logo">Pep</span>
     </div>
-
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="features.html">Features</a>
-        <a href="pricing.html">Pricing</a>
-        <a href="support.html" class="active">Support</a>
-    </nav>
-
-     <button class="btn-primary" onclick="openAuthModal()">
-  Get Started
-</button>
+  </div>
 
 
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="features.html">Features</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="support.html" class="active">Support</a>
+  </nav>
+
+  <div id="navAuthArea">
+    <button class="btn-primary" onclick="openAuthModal()">Get Started</button>
+
+  </div>
 </header>
 
-
-<section class="hero feature-wrap support-section">
-
+<!-- SUPPORT -->
+<section class="support-section">
   <h1>Support Center</h1>
   <p class="sub">We’re here to help you 24/7</p>
-
+<button class="mini-btn my-ticket-btn" onclick="openTicketHistory()">
+  📩 My Tickets
+</button>
   <div class="support-grid">
 
-    <!-- LIVE CHAT -->
     <div class="support-card">
       <h3>💬 Live Chat</h3>
       <p>Chat instantly with our support team.</p>
-      <button class="mini-btn" onclick="startChat()">Start Chat</button>
+      <button class="mini-btn" onclick="openChatChoice()">Start Chat</button>
     </div>
 
-    <!-- RAISE TICKET -->
     <div class="support-card popular">
       <div class="badge">Fastest</div>
       <h3>🎫 Raise Ticket</h3>
       <p>Submit your issue and get a solution.</p>
-      <button class="mini-btn" onclick="openSupport()">Create Ticket</button>
+<button class="mini-btn" onclick="openTicketModal()">Create Ticket</button>
     </div>
 
-    <!-- CALL SUPPORT -->
     <div class="support-card">
       <h3>📞 Call Support</h3>
       <p>Talk directly with our experts.</p>
       <button class="mini-btn" onclick="openContact()">Contact Us</button>
-
     </div>
 
   </div>
 </section>
 
-<!-- SUPPORT MODAL -->
-<div class="modal" id="supportModal">
-  <div class="modal-box support-modal">
-    <h3>Raise a Support Ticket</h3>
+<!-- CHAT CHOICE -->
+ <button class="modal-close" onclick="closeActiveModal()">✕</button>
 
-    <input class="support-input" placeholder="Your Name">
-    <input class="support-input" placeholder="Email">
-    <textarea class="support-input" rows="4" placeholder="Describe your issue"></textarea>
+<div class="modal" id="chatChoiceModal">
+  <div class="modal-box support-modal">
+    <h3>💬 Choose Chat Option</h3>
+    <p class="sub-text">How would you like to chat?</p>
+
+    <div class="modal-actions">
+      <button class="mini-btn" onclick="openWhatsApp()">WhatsApp</button>
+      <button class="mini-btn outline" onclick="startChat()">Chatbot</button>
+      <button class="mini-btn outline" onclick="closeChatChoice()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- SUPPORT TICKET MODAL -->
+ <button class="modal-close" onclick="closeActiveModal()">✕</button>
+
+<div class="modal" id="supportModal">
+  <div class="modal-box support-modal ticket-modal">
+
+    <h3 class="ticket-title">🎫 Raise a Support Ticket</h3>
+    <p class="ticket-sub">Tell us your issue and we’ll get back to you</p>
+
+    <input
+      type="text"
+      id="ticketName"
+      class="support-input"
+      placeholder="Your Name"
+    >
+
+    <input
+      type="email"
+      id="ticketEmail"
+      class="support-input"
+      placeholder="Email Address"
+    >
+
+    <textarea
+      id="ticketMessage"
+      class="support-input"
+      rows="4"
+      placeholder="Describe your issue clearly..."
+    ></textarea>
 
     <div class="modal-actions">
       <button class="mini-btn" onclick="submitTicket()">Submit</button>
       <button class="mini-btn outline" onclick="closeSupport()">Close</button>
     </div>
+
   </div>
 </div>
 
-<script>
+<!-- CONTACT -->
+ <button class="modal-close" onclick="closeActiveModal()">✕</button>
 
+<div class="modal" id="contactModal">
+  <div class="modal-box support-modal">
+    <h3>📞 Contact Support</h3>
+    <p class="sub-text">Our team is available 24×7</p>
+
+    <div class="contact-details">
+      <p><strong>Phone: +91 98765 43210 </strong></p>
+      <p><strong>Email: support@pep.com</strong></p>
+    </div>
+
+    <div class="modal-actions">
+      <button class="mini-btn" onclick="callNow()">Call Now</button>
+      <button class="mini-btn outline" onclick="emailSupport()">Email</button>
+      <button class="mini-btn outline" onclick="closeContact()">Close</button>
+    </div>
+  </div>
+</div>
+<button class="modal-close" onclick="closeActiveModal()">✕</button>
+
+<div class="modal" id="ticketHistoryModal">
+  <div class="modal-box support-modal">
+    <h3>📩 My Ticket History</h3>
+
+    <div id="ticketList"></div>
+
+    <div class="modal-actions">
+      <button class="mini-btn outline" onclick="closeTicketHistory()">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- AUTH MODAL -->
+<div class="auth-overlay" id="authOverlay">
+  <div class="auth-card">
+
+    <span class="auth-close" onclick="closeAuthModal()">×</span>
+    <div class="auth-logo">Pep</div>
+
+    <!-- SIGNUP -->
+    <form id="signupForm" onsubmit="handleSignup(event)">
+      <h2>Create Account</h2>
+      <input type="text" id="signupName" placeholder="Name" required>
+      <input type="email" id="signupEmail" placeholder="Email" required>
+      <input type="password" placeholder="Password" required>
+      <button class="btn-primary auth-btn">Create Account</button>
+      <p class="auth-switch">
+        Already have an account?
+        <span onclick="showLogin()">Login</span>
+      </p>
+    </form>
+
+    <!-- LOGIN -->
+    <form id="loginForm" style="display:none;" onsubmit="handleLogin(event)">
+      <h2>Login</h2>
+      <input type="email" id="loginEmail" placeholder="Email" required>
+      <input type="password" placeholder="Password" required>
+      <button class="btn-primary auth-btn">Login</button>
+      <p class="auth-switch">
+        New to Pep?
+        <span onclick="showSignup()">Create Account</span>
+      </p>
+    </form>
+
+  </div>
+</div>
+
+<!-- ================= JS ================= -->
+<script>
+/* AUTH UI */
+function openAuthModal(){ authOverlay.style.display="flex"; }
+function closeAuthModal(){ authOverlay.style.display="none"; }
+function showLogin(){ signupForm.style.display="none"; loginForm.style.display="block"; }
+function showSignup(){ loginForm.style.display="none"; signupForm.style.display="block"; }
+
+/* USER DB */
+function saveUser(name,email){
+  const users=JSON.parse(localStorage.getItem("pepSession"))||{};
+  users[email]={name,email};
+  localStorage.setItem("pepSession",JSON.stringify(users));
+}
+function getUser(email){
+  const users=JSON.parse(localStorage.getItem("pepSession"))||{};
+  return users[email];
+}
+
+/* SESSION */
+function startSession(user) {
+  const sessionUser = {
+    name: user.name,
+    email: user.email,
+    phone: user.phone || "",
+    loggedIn: true
+  };
+
+  localStorage.setItem("pepSession", JSON.stringify(sessionUser));
+}
+
+function getSession(){
+  return JSON.parse(localStorage.getItem("pepSession"));
+}
+function endSession(){
+  localStorage.removeItem("pepSession");
+  const initial = document.getElementById("profileInitial");
+  if (initial) initial.innerText = "";
+  location.reload();
+}
+function openDashboard() {
+  const user = getSession();
+  if (!user) {
+    openAuthModal();
+    return;
+  }
+
+  const tickets = JSON.parse(localStorage.getItem("pepTickets")) || {};
+  const userTickets = tickets[user.email] || [];
+
+  document.getElementById("dashboardInfo").innerHTML = `
+    <p><strong>Name:</strong> ${user.name}</p>
+    <p><strong>Email:</strong> ${user.email}</p>
+    <p><strong>Tickets Raised:</strong> ${userTickets.length}</p>
+  `;
+
+  document.getElementById("dashboardModal").style.display = "flex";
+}
+
+function closeDashboard() {
+  document.getElementById("dashboardModal").style.display = "none";
+}
+
+/* SIGNUP */
+function handleSignup(e) {
+  e.preventDefault();
+
+  const name = signupName.value.trim();
+  const email = signupEmail.value.trim();
+
+  if (!name || !email) {
+    alert("Please fill all fields");
+    return;
+  }
+
+  // 1️⃣ Load existing users
+  const users = JSON.parse(localStorage.getItem("pepUsers")) || {};
+
+  // 2️⃣ Prevent duplicate signup
+  if (users[email]) {
+    alert("Account already exists. Please login.");
+    showLogin();
+    return;
+  }
+
+  // 3️⃣ Save user permanently
+  users[email] = {
+    name: name,
+    email: email,
+    plan: "Free"
+  };
+
+  localStorage.setItem("pepUsers", JSON.stringify(users));
+
+  // 4️⃣ Start login session
+  localStorage.setItem(
+    "pepSession",
+    JSON.stringify({
+      name: name,
+      email: email,
+      plan: "Free",
+      loggedIn: true
+    })
+  );
+
+  closeAuthModal();
+  location.reload();
+}
+
+
+/* LOGIN */
+function handleLogin(e) {
+  e.preventDefault();
+
+  const email = loginEmail.value.trim();
+  const users = JSON.parse(localStorage.getItem("pepUsers")) || {};
+  const user = users[email];
+
+  if (!user) {
+    alert("Account not found. Please signup first.");
+    return;
+  }
+
+  localStorage.setItem(
+    "pepSession",
+    JSON.stringify({
+      name: user.name,
+      email: user.email,
+      plan: user.plan || "Free",
+      loggedIn: true
+    })
+  );
+
+  closeAuthModal();
+  location.reload();
+}
+
+
+function renderNavbarAuth() {
+  const user = getSession();
+  const navArea = document.getElementById("navAuthArea");
+
+  if (!navArea) return;
+
+  if (!user || !user.loggedIn) {
+    navArea.innerHTML = `
+      <button class="btn-primary" onclick="openAuthModal()">
+        Get Started
+      </button>
+    `;
+    return;
+  }
+
+  navArea.innerHTML = `
+    <button class="mini-btn logout-btn" onclick="endSession()">Logout</button>
+`;
+}
+
+document.addEventListener("DOMContentLoaded", renderNavbarAuth);
+
+
+
+/* SUPPORT ACTIONS */
+function openChatChoice(){ chatChoiceModal.style.display="flex"; }
+function closeChatChoice(){ chatChoiceModal.style.display="none"; }
+function openWhatsApp(){ closeChatChoice(); window.open("https://wa.me/919876543210?text=Hi%20Pep%20Support","_blank"); }
+function startChat(){ closeChatChoice(); if(window.Tawk_API){Tawk_API.maximize();} }
+function openSupport(){ supportModal.style.display="flex"; }
+function closeSupport(){ supportModal.style.display="none"; }
+function openContact(){ contactModal.style.display="flex"; }
+function closeContact(){ contactModal.style.display="none"; }
+function callNow(){ window.location.href="tel:+919876543210"; }
+function emailSupport(){ window.location.href="mailto:support@pep.com"; }
+
+/* BACK */
+function goBack(){ window.location.href="index.html"; }
+</script>
+
+<!-- TAWK -->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{};
+(function(){
+var s=document.createElement("script");
+s.src='https://embed.tawk.to/6965f17701fa4519826fd0cb/1jer3eh7c';
+s.async=true;
+document.body.appendChild(s);
+})();
 function openSupport() {
+  const user = JSON.parse(localStorage.getItem("pepSession"));
+  if (!user) {
+    openAuthModal();
+    return;
+  }
+
+  document.getElementById("ticketName").value = user.name || "";
+  document.getElementById("ticketEmail").value = user.email || "";
+  document.getElementById("ticketMessage").value = "";
+
   document.getElementById("supportModal").style.display = "flex";
 }
 
@@ -90,104 +398,278 @@ function closeSupport() {
 }
 
 function submitTicket() {
-  alert("Your ticket has been submitted successfully!");
+  const user = JSON.parse(localStorage.getItem("pepSession"));
+  if (!user) return;
+
+  const message = document.getElementById("ticketMessage").value.trim();
+  if (!message) {
+    alert("Please describe your issue");
+    return;
+  }
+
+  const ticket = {
+    id: "TCK-" + Math.floor(Math.random() * 100000),
+    message,
+    date: new Date().toLocaleDateString(),
+    status: "Open"
+  };
+
+  const tickets = JSON.parse(localStorage.getItem("pepTickets")) || {};
+  tickets[user.email] = tickets[user.email] || [];
+  tickets[user.email].push(ticket);
+
+  localStorage.setItem("pepTickets", JSON.stringify(tickets));
+
+  alert("✅ Ticket submitted successfully");
   closeSupport();
 }
 </script>
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/6965f17701fa4519826fd0cb/1jer3eh7c';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
 <script>
-function startChat() {
-  if (window.Tawk_API) {
-    Tawk_API.maximize();   // opens the chat widget
+function openTicketHistory() {
+  const user = JSON.parse(localStorage.getItem("pepSession"));
+  
+  const ticketsData = JSON.parse(localStorage.getItem("pepTickets")) || {};
+  const userTickets = ticketsData[user.email] || [];
+
+  const list = document.getElementById("ticketList");
+  list.innerHTML = "";
+
+  if (userTickets.length === 0) {
+    list.innerHTML = "<p>No tickets raised yet.</p>";
   } else {
-    alert("Chat service is loading, please try again in a moment.");
+    userTickets.forEach(ticket => {
+      list.innerHTML += `
+<div style="
+  max-width:420px;
+  margin:10px auto;
+  padding:14px;
+  border-radius:10px;
+  background:#1f1f1f;
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+">
+
+          <strong style="font-size:14px;">${ticket.id}</strong><br>
+          <small style="color:#ffffff;">${ticket.date}</small>
+          <p style="margin-top:8px;font-size:14px;">${ticket.message}</p>
+        </div>
+      `;
+    });
   }
+
+  document.getElementById("ticketHistoryModal").style.display = "flex";
 }
+
+function closeTicketHistory() {
+  document.getElementById("ticketHistoryModal").style.display = "none";
+}
+
 </script>
+<!-- USER SIDEBAR -->
+<div id="sidebarOverlay" class="sidebar-overlay" onclick="closeSidebar()"></div>
+<aside id="userSidebar" class="user-sidebar">
+  <button class="sidebar-close" onclick="closeSidebar()">✕</button>
 
-
-<!-- CONTACT SUPPORT MODAL -->
-<div class="modal" id="contactModal">
-  <div class="modal-box support-modal">
-
-    <h3>📞 Contact Support</h3>
-    <p class="sub-text">
-      Our support team is available 24/7 to help you.
-    </p>
-
-    <div class="contact-details">
-      <p><strong>Phone:</strong> +91 98765 43210</p>
-      <p><strong>Email:</strong> support@pep.com</p>
-      <p><strong>Hours:</strong> 24 × 7</p>
+  <div class="sidebar-profile">
+    <div class="profile-circle">
+    <div class="profile-initial" id="profileInitial"></div>
     </div>
-
-    <div class="modal-actions">
-     <button class="mini-btn" onclick="callNow()">Call Now</button>
-      <button class="mini-btn outline" onclick="emailSupport()">Email Us</button>
-      <button class="mini-btn outline" onclick="closeContact()">Close</button>
+    <div class="profile-info">
+      <h4 id="sidebarName">User</h4>
+      <p id="sidebarEmail">user@email.com</p>
+      <p id="sidebarPlan"></p>
     </div>
+  </div>
 
+  <div class="sidebar-menu modern">
+
+  <!-- Search -->
+  <input type="text" placeholder="Search…" id="sidebarSearch" />
+
+
+  <nav class="sidebar-nav">
+
+    <p class="nav-title">Account</p>
+    <a onclick="openProfile()">📝 Edit Profile</a>
+    <a onclick="openSettings()">⚙️ Settings</a>
+
+    <p class="nav-title">Support</p>
+    <a onclick="openTicketHistory()">📩 My Tickets</a>
+    <a onclick="openSupport()">➕ Raise Ticket</a>
+
+    <p class="nav-title">Preferences</p>
+    <a onclick="toggleTheme()">🎨 Theme</a>
+<a class="sidebar-link notification-link" onclick="openNotifications()">
+  <span class="icon">🔔</span>
+  <span class="text">Notifications</span>
+  <span class="notif-badge" id="notifCount">3</span>
+</a>
+
+
+    <p class="nav-title">Help</p>
+<a href="help.html">❓ Help Center</a>
+
+  </nav>
+</div>
+  <div class="sidebar-footer">
+    <button class="logout-btn" onclick="endSession()">🚪 Log Out</button>
   </div>
 </div>
+
+<div id="sidebarOverlay" class="sidebar-overlay" onclick="closeSidebar()"></div>
+<button class="modal-close" onclick="closeActiveModal()">✕</button>
+
+<div class="modal" id="profileModal">
+<div class="modal-box support-modal" id="sidebarContent">
+  <button class="modal-close-btn" onclick="closeProfile()">✕</button>
+    <h3>Edit Profile</h3>
+
+    <input id="editName" class="support-input" placeholder="Name">
+    <input id="editEmail" class="support-input" placeholder="Email">
+    <input id="editPhone" class="support-input" placeholder="Phone Number">
+
+    <div class="modal-actions">
+      <button class="mini-btn" onclick="saveProfile()">Save</button>
+      <button class="mini-btn outline" onclick="closeProfile()">Cancel</button>
+    </div>
+  </div>
+</div>
+
 <script>
-function openContact() {
-  document.getElementById("contactModal").style.display = "flex";
+function openTicketModal() {
+  const user = JSON.parse(localStorage.getItem("pepSession"));
+  if (!user || !user.loggedIn) {
+    openAuthModal();
+    return;
+  }
+
+  document.getElementById("ticketName").value = user.name || "";
+  document.getElementById("ticketEmail").value = user.email || "";
+  document.getElementById("ticketMessage").value = "";
+
+  document.getElementById("supportModal").style.display = "flex";
 }
 
-function closeContact() {
-  document.getElementById("contactModal").style.display = "none";
-}
-
-function emailSupport() {
-  window.location.href = "mailto:support@pep.com";
-}
-
-function callNow() {
-  window.location.href = "tel:+919876543210";
+function closeSupport() {
+  document.getElementById("supportModal").style.display = "none";
 }
 </script>
-<div class="auth-overlay" id="authOverlay">
 
-  <div class="auth-card">
-  <form id="authForm" onsubmit="handleCreateAccount(event)">
-
-    <!-- Close button -->
-    <span class="auth-close" onclick="closeAuthModal()">×</span>
-
-    <!-- Logo -->
-    <div class="auth-logo">Pep</div>
-
-    <h2>Create Account</h2>
-
-    <input type="text" id="name" placeholder="Name" required>
-    <input type="email" id="email" placeholder="Email" required>
-    <input type="password" id="password" placeholder="Password" required>
-
-    <button class="btn-primary auth-btn" type="submit">
-      Create Account
-    </button>
-
-  </form>
-</div>
-</div>
 <script>
-function openAuthModal() {
-  document.getElementById("authOverlay").style.display = "flex";
+function renderNotifications() {
+  list.innerHTML = "";
+
+  if (!notifications.length) {
+    list.innerHTML = `
+      <div class="empty-state">
+        🎉 You're all caught up<br>
+        <small>No new notifications</small>
+      </div>
+    `;
+    return;
+  }
+
+  notifications.forEach(n => {
+    const item = document.createElement("div");
+    item.className = "notification-item";
+    item.innerHTML = `
+      ${n.text}<br>
+      <span>${n.time}</span>
+    `;
+    list.appendChild(item);
+  });
 }
-function closeAuthModal() {
-  document.getElementById("authOverlay").style.display = "none";
+
+btn?.addEventListener("click", (e) => {
+  e.stopPropagation();
+  panel.classList.toggle("hidden");
+  renderNotifications();
+  badge.style.display = "none";
+});
+
+document.addEventListener("click", (e) => {
+  if (!panel.contains(e.target) && !btn.contains(e.target)) {
+    panel.classList.add("hidden");
+  }
+});
+</script>
+<script src="js/appState.js"></script>
+<script src="js/sidebar.js"></script>
+<script src="js/session.js"></script>
+<!-- NOTIFICATIONS MODAL -->
+ <button class="modal-close" onclick="closeActiveModal()">✕</button>
+
+<div class="modal" id="notificationModal">
+  <div class="modal-box support-modal">
+    <h3>Notifications</h3>
+    <p class="sub-text">Your recent activity</p>
+
+    <div id="notificationList" class="notification-list"></div>
+
+    <div class="modal-actions">
+      <button class="mini-btn outline" onclick="closeNotifications()">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- NOTIFICATIONS SCRIPT -->
+<script>
+const notifications = [
+  { text: "Welcome to Pep 🎉", time: "Just now" },
+  { text: "Account created successfully", time: "Today" },
+  { text: "Check Settings to customize", time: "Today" }
+];
+
+
+
+function updateNotificationBadge() {
+  const badge = document.getElementById("notifCount");
+  if (!badge) return;
+
+  const notifications = [
+    { text: "Welcome to Pep 🎉", time: "Just now" },
+    { text: "Account created successfully", time: "Today" },
+    { text: "Check Settings to customize", time: "Today" }
+  ];
+
+  if (notifications.length > 0 && !isNotificationsRead()) {
+    badge.style.display = "inline-flex";
+    badge.innerText = notifications.length;
+  } else {
+    badge.style.display = "none";
+  }
 }
+
+function openNotifications() {
+  markNotificationsRead();        // ✅ persist read state
+  updateNotificationBadge();
+  renderNotifications();
+  document.getElementById("notificationModal").style.display = "flex";
+}
+
+
+function closeNotifications() {
+  document.getElementById("notificationModal").style.display = "none";
+}
+
+function renderNotifications() {
+  const list = document.getElementById("notificationList");
+  if (!list) return;
+
+  list.innerHTML = "";
+
+  notifications.forEach(n => {
+    const div = document.createElement("div");
+    div.className = "notification-item";
+    div.innerHTML = `
+      <strong>${n.text}</strong>
+      <span>${n.time}</span>
+    `;
+    list.appendChild(div);
+  });
+}
+
+document.addEventListener("DOMContentLoaded", updateNotificationBadge);
+
 </script>
 
 </body>
