@@ -2,23 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Tickets – Pep</title>
   <link rel="stylesheet" href="css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 </head>
 
 <body class="tickets-page">
-<button class="dashboard-close-btn" onclick="goBack()">✕</button>
-
-<!-- NAVBAR -->
 <header class="navbar">
   <div class="nav-left">
-    <!-- HAMBURGER -->
     <button class="hamburger-btn" onclick="openSidebar()">☰</button>
-
-    <!-- LOGO -->
     <div class="logo-wrapper">
       <span class="logo">Pep</span>
+          <button class="back-btn" onclick="goBack()">←</button> 
+
     </div>
   </div>
 
@@ -31,21 +28,21 @@
   <button class="mini-btn logout-btn" onclick="logout()">Logout</button>
 </header>
 
-<!-- DASHBOARD -->
+
 <section class="dashboard-section">
   <h1 id="welcomeText">Welcome</h1>
   <p id="userEmail" class="muted"></p>
 
   <h2 class="ticket-heading">📩 Your Support Tickets</h2>
 
-  <!-- FILTERS -->
+  
   <div class="ticket-filters">
     <button class="filter-btn active" onclick="filterTickets('all', this)">All</button>
     <button class="filter-btn" onclick="filterTickets('Open', this)">Open</button>
     <button class="filter-btn" onclick="filterTickets('Closed', this)">Closed</button>
   </div>
 
-  <!-- TICKET LIST -->
+  
   <div id="ticketContainer"></div>
 </section>
 
@@ -127,13 +124,11 @@ function openTicketHistory() {
     openAuthModal();
     return;
   }
-
-  // ✅ Always open dashboard page
   window.location.href = "dashboard.html";
 }
 
 </script>
-<!-- USER SIDEBAR -->
+
 <div id="sidebarOverlay" class="sidebar-overlay" onclick="closeSidebar()"></div>
 
 <aside id="userSidebar" class="user-sidebar">
@@ -184,7 +179,7 @@ function openTicketHistory() {
   </div>
 </aside>
 
-<!-- FLOATING PROFILE -->
+
 
 <script src="js/appState.js"></script>
 <script src="js/sidebar.js"></script>

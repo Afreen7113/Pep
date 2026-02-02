@@ -37,7 +37,7 @@ body::after {
         transparent 70%
     );
 
-    filter: blur(90px);   /* 🔥 THIS IS THE KEY */
+    filter: blur(90px);   
     z-index: -1;
     pointer-events: none;
 }
@@ -58,14 +58,6 @@ body::before {
     z-index: -1;
     pointer-events: none;
 }
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 36px 70px;
-    justify-content: space-between;
-    position: relative;
-}
 .navbar .logout-btn {
   width: auto;             
   padding: 6px 14px;        
@@ -74,12 +66,20 @@ body::before {
   margin-left: auto;       
   white-space: nowrap;
 }
-.navbar nav {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+.navbar {
   display: flex;
-  gap: 24px;           /* clean professional spacing */
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 24px 32px;
+  position: relative;
+}
+
+
+.navbar nav {
+  display: flex;
+  gap: 20px;
+  margin: 0 auto;
 }
 .dashboard-section {
   position: relative;
@@ -95,20 +95,20 @@ body::before {
   pointer-events: none;
 }
 .dashboard-section h1 {
-  margin-bottom: 10px;   /* Welcome → Email */
+  margin-bottom: 10px;   
 }
 
 .dashboard-section .muted {
-  margin-bottom: 28px;   /* Email → Tickets heading */
+  margin-bottom: 28px;   
   display: block;
 }
 
 .ticket-heading {
-  margin-bottom: 20px;   /* Heading → Filters */
+  margin-bottom: 20px;   
 }
 
 .ticket-filters {
-  margin-bottom: 24px;   /* Filters → Ticket list */
+  margin-bottom: 24px;   
 }
 .logo-wrapper {
     position: relative;
@@ -158,11 +158,12 @@ body::before {
 
 
 nav a {
-    margin: 0 20px;
-    text-decoration: none;
-    color:#0b032d;
-     font-size: 30px !important;  
-    font-weight: 500;
+  margin: 0 10px;
+  text-decoration: none;
+  color: #0b032d;
+  font-size: 18px;
+  font-weight: 500;
+  white-space: nowrap;
 }
 nav a.active {
     font-weight: bold;
@@ -200,9 +201,9 @@ img {
     max-width: 100%;
 }
 .hero-right h1 {
-    font-size: 56px;
-    font-weight: 800;
-    color: #0b032d;
+  font-size: 40px;
+  font-weight: 700;
+  color: #0b032d;
 }
 
 .hero-right p {
@@ -217,9 +218,10 @@ img {
 }
 
 .hero-title .line {
-    font-size: 48px;
-    font-weight: 600;     color: #0b032d;
-    line-height: 1.1;
+  font-size: 32px;
+  font-weight: 600;
+  color: #0b032d;
+  line-height: 1.2;
 }
 
 .hero-title .connect {
@@ -244,10 +246,54 @@ img {
     margin-bottom: 36px;
      margin-left: -60px;
   margin-top: 20px;
-  max-width: 520px;   /* optional – keeps text neat */
+  max-width: 520px;   
   text-align: left;
 }
+@media (max-width: 1024px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 32px 20px;
+  }
 
+  .hero-left img {
+    width: 90%;
+    max-width: 420px;
+    margin: 0 auto 20px;
+  }
+
+  
+  .hero-title .connect,
+  .hero-title .grow,
+  .hero-title .share,
+  .hero-desc {
+    margin-left: 0;
+  }
+
+  .hero-title {
+    align-items: center;
+  }
+
+  .hero-title .line {
+    font-size: 26px;
+  }
+
+  .hero-desc {
+    font-size: 15px;
+    text-align: center;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 24px 14px;
+  }
+
+  .hero-title .line {
+    font-size: 22px;
+  }
+}
 .store-buttons {
     display: flex;
     align-items: center;     gap: 16px;
@@ -379,7 +425,7 @@ img {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 28px;
-    row-gap: 20px;   /* controls space BETWEEN rows */
+    row-gap: 20px;   
   column-gap: 24px;
 }
 
@@ -669,7 +715,7 @@ img {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
 }
-/* Dark glass-style modal card */
+
 .modal-box.support-modal {
   background: linear-gradient(
     135deg,
@@ -841,7 +887,7 @@ img {
 }
 
 .support-card .mini-btn {
-  padding: 8px 16px;          /* was 10px 18px */
+  padding: 8px 16px;          
   font-size: 14px;
   background: #0b0320;
   color: #ffffff;
@@ -1251,14 +1297,14 @@ img {
 }
 @media (max-width: 768px) {
 
-  /* Navbar */
+  
   .navbar {
     flex-direction: column;
     gap: 20px;
     padding: 20px;
   }
 
-  /* Headings */
+  
   .hero-title .line {
     font-size: 32px;
   }
@@ -1269,7 +1315,7 @@ img {
     font-size: 28px;
   }
 
-  /* SUPPORT & PRICING → HORIZONTAL SCROLL */
+  
   .support-grid,
   .pricing-grid {
     display: grid;
@@ -1281,13 +1327,26 @@ img {
 
     padding-bottom: 16px;
   }
-  /* hide scrollbar (optional, looks cleaner) */
+  
   .support-grid::-webkit-scrollbar,
   .pricing-grid::-webkit-scrollbar {
     display: none;
   }
 }
-/* FORCE MOBILE HORIZONTAL CARDS — SUPPORT & PRICING */
+@media (max-width: 900px) {
+  .navbar {
+    padding: 16px;
+  }
+
+  .navbar nav {
+    display: none;           
+  }
+
+  .logo {
+    font-size: 28px !important;
+  }
+}
+
 @media (max-width: 768px) {
 
   .support-grid,
@@ -1355,36 +1414,9 @@ img {
   margin: 10px auto;
   display: block;
 }
-.back-btn {
-   position: fixed;
-  top: 18px;
-  right: 18px;
-  left: auto;
-
-  width: 42px;
-  height: 42px;
-
-  border-radius: 50%;
-  border: none;
-
-  color: #0b032d;
-
-  font-size: 22px;
-  font-weight: 600;
-
-  cursor: pointer;
-  z-index: 1000;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  transition: transform 0.2s ease, background 0.2s ease;
-}
 
 .back-btn:hover {
-  transform: scale(1.05);
-  background: #ede9fe;
+  background: #000;
 }
 .support-grid {
   margin-bottom: 0;
@@ -1432,28 +1464,8 @@ img {
 .support-section > .my-ticket-btn {
   margin: 16px auto;
 }
-/* SIDEBAR */
-.user-sidebar {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: -320px;
-  width: 300px;
-  height: 100vh;
-  background: #ffffff;
-  box-shadow: 8px 0 30px rgba(0,0,0,0.15);
-  transition: left 0.35s ease;
-  z-index: 1001;
-  display: flex;
-  flex-direction: column;
-  
-}
 
-.user-sidebar.active {
-  left: 0;
-}
 
-/* Overlay */
 .sidebar-overlay {
   position: fixed;
   inset: 0;
@@ -1466,7 +1478,7 @@ img {
   display: block;
 }
 
-/* Header */
+
 .sidebar-header {
   padding: 24px;
   display: flex;
@@ -1499,7 +1511,7 @@ img {
   color: #777;
 }
 
-/* Menu */
+
 .sidebar-menu {
   padding: 16px;
   display: flex;
@@ -1521,7 +1533,7 @@ img {
   background: #f3f4ff;
 }
 
-/* Footer */
+
 .sidebar-footer {
   margin-top: auto;
   padding: 16px;
@@ -1536,28 +1548,36 @@ img {
   border: none;
   cursor: pointer;
 }
+
 .user-sidebar {
   position: fixed;
   top: 0;
-  left: -100%;
-  height: 100vh;
-  width: 320px;
+  bottom: 0;                 
+  left: -260px;              
 
-  background: #ffffff;   /* WHITE */
+  width: 260px;              
+  max-width: 80vw;
+
+  background: #ffffff;
   color: #111111;
-
   z-index: 1001;
+
+  box-shadow: 4px 0 20px rgba(0,0,0,0.12);
+  overflow-y: auto;
   transition: left 0.3s ease;
 
-  overflow-y: auto;
-  box-shadow: 4px 0 20px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column;    
 }
 
 .user-sidebar.active {
-  left: 0;
+  left: 0;                   
 }
-
-
+@media (max-width: 400px) {
+  .user-sidebar {
+    width: 250px;
+  }
+}
 .sidebar-overlay {
   position: fixed;
   inset: 0;
@@ -1771,7 +1791,7 @@ img {
 #sidebarContent p {
   margin-bottom: 10px;
 }
-/* TICKET MODAL – PROFESSIONAL POLISH */
+
 .ticket-modal {
   max-width: 420px;
   padding: 36px;
@@ -1801,7 +1821,7 @@ img {
 .ticket-modal .modal-actions {
   margin-top: 18px;
 }
-/* DASHBOARD */
+
 .dashboard-section {
   max-width: 900px;
   margin: 60px auto;
@@ -1889,7 +1909,7 @@ img {
   border: none;
   cursor: pointer;
 }
-/* DASHBOARD TOP BUTTONS */
+
 .dash-btn {
   position: fixed;
   top: 18px;
@@ -2020,7 +2040,7 @@ img {
 .settings-card.row input[type="checkbox"] {
   width: 18px;
   height: 18px;
-  accent-color: #7c3aed; /* Pep purple */
+  accent-color: #7c3aed; 
   cursor: pointer;
 }
 
@@ -2041,7 +2061,15 @@ img {
   grid-template-columns: 2fr 1fr;
   gap: 24px;
 }
+@media (max-width: 900px) {
+  .settings-page {
+    padding: 40px 16px;
+  }
 
+  .settings-layout {
+    grid-template-columns: 1fr;
+  }
+}
 .section-header {
   display: flex;
   justify-content: space-between;
@@ -2060,12 +2088,43 @@ img {
   background: #dcfce7;
   color: #166534;
 }
+body.dark .status-chip.success {
+    background: transparent;         
+}
 
+body.dark .status-chip.warning {
+    background: transparent;         
+}
 .status-chip.warning {
   background: #fef3c7;
   color: #92400e;
 }
+body.dark .status-chip {
+    background: transparent;                          /* no light layer */
+    border: 1px solid rgba(129, 140, 248, 0.9);       /* bluish border like Change/View */
+    border-radius: 999px;                             /* pill shape */
+}
 
+body.dark .status-chip.success,
+body.dark .status-chip.warning {
+    background: transparent !important;
+}
+/* Base chip look in dark mode */
+body.dark #twoFAChip {
+  border: 1px solid rgba(129, 140, 248, 0.9); /* same blue as Change/View */
+  border-radius: 999px;
+  padding: 6px 16px;
+}
+
+/* Enabled = green background */
+body.dark #twoFAChip.is-enabled {
+  background: #16a34a;   /* green */
+}
+
+/* Disabled = red background */
+body.dark #twoFAChip.is-disabled {
+  background: #dc2626;   /* red */
+}
 .settings-card.light {
   background: rgba(255,255,255,0.75);
 }
@@ -2126,26 +2185,12 @@ img {
   margin-top: auto;
 }
 
-.logout-link {
-  width: 100%;
-  background: none;
-  border: none;
-  padding: 10px 12px;
-  font-size: 14px;
-  color: #b91c1c;
-  text-align: left;
-  border-radius: 8px;
-  cursor: pointer;
-}
 
-.logout-link:hover {
-  background: rgba(185, 28, 28, 0.08);
-}
 .settings-actions {
   display: flex;
   flex-direction: column;
-  gap: 14px;              /* space between buttons */
-  margin-top: 20px;       /* space from content above */
+  gap: 14px;              
+  margin-top: 20px;       
 }
 
 .settings-actions .mini-btn,
@@ -2230,14 +2275,20 @@ img {
 }
 
 .sidebar-nav a {
-  padding: 5px 8px;
+  padding: 6px 10px;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 20px !important;
-    text-decoration: none;
+  font-size: 14px;       
+  text-decoration: none;
   line-height: 1.4;
+  
 }
-
+@media (max-width: 400px) {
+  .sidebar-nav a {
+    font-size: 14px;
+    padding: 6px 8px;
+  }
+}
 .sidebar-nav a:hover {
   background: #f3f4ff;
   color: #4f46e5;
@@ -2261,11 +2312,11 @@ img {
 }
 
 body.dark {
-  background-color: #1b1e24;   /* lighter than before */
+  background-color: #1b1e24;   
  
 }
 
-/* Text */
+
 body.dark h1,
 body.dark h2,
 body.dark h3,
@@ -2277,27 +2328,27 @@ body.dark strong {
   color: #ffffff;
 }
 
-/* Muted text */
+
 body.dark .muted {
   color: #d5d7dc;
 }
 
-/* Cards & containers */
+
 body.dark .settings-card,
 body.dark .modal-box,
 body.dark .user-sidebar,
 body.dark .ticket-card,
 body.dark .dashboard-section {
-  background-color: #242833;   /* soft card gray */
+  background-color: #242833;   
   border: 1px solid #343847;
 }
 
-/* Sidebar */
+
 body.dark .settings-sidebar {
   background-color: #20232c;
 }
 
-/* Inputs */
+
 body.dark input,
 body.dark textarea {
   background-color: #ffffff;
@@ -2305,9 +2356,9 @@ body.dark textarea {
   border: 1px solid #3a3f50;
 }
 
-/* Buttons */
+
 body.dark .mini-btn {
-  background-color: #4c6fff;   /* calmer blue */
+  background-color: #4c6fff;   
   color: #ffffff;
 }
 
@@ -2317,7 +2368,7 @@ body.dark .mini-btn.outline {
   color: #ffffff;
 }
 
-/* Status chips */
+
 body.dark .status-chip {
   color: #ffffff;
 }
@@ -2326,17 +2377,17 @@ body.dark {
   
 }
 
-/* Force ALL text to white */
+
 body.dark * {
   color: #ffffff !important;
 }
 
-/* Muted text (still readable, slightly softer) */
+
 body.dark .muted {
   color: #e5e7eb !important;
 }
 
-/* Inputs */
+
 body.dark input,
 body.dark textarea {
   background-color: #2a2e3a;
@@ -2344,13 +2395,13 @@ body.dark textarea {
   border: 1px solid #3b3f4d;
 }
 
-/* Sidebar */
+
 body.dark .settings-sidebar,
 body.dark .user-sidebar {
   background-color: #ffffff;
 }
 
-/* Cards */
+
 body.dark .settings-card,
 body.dark .modal-box,
 body.dark .ticket-card {
@@ -2358,7 +2409,7 @@ body.dark .ticket-card {
   border-color: #35394a;
 }
 
-/* Buttons */
+
 body.dark .mini-btn {
   background: #2d2f3a;
   color: #ffffff;
@@ -2375,7 +2426,7 @@ body.dark .mini-btn.outline {
   color: #ffffff !important;
 }
 
-/* Links */
+
 body.dark a {
   color: #ffffff !important;
 }
@@ -2424,11 +2475,11 @@ body.dark {
       rgba(138, 92, 246, 0.25),
       transparent 45%
     ),
-    #1f2230; /* not black */
+    #1f2230; 
  
 }
 
-/* Text visibility */
+
 body.dark h1,
 body.dark h2,
 body.dark h3,
@@ -2439,12 +2490,12 @@ body.dark a {
   color: #ffffff;
 }
 
-/* Muted text */
+
 body.dark .muted,
 body.dark small {
   color: #cfcfe6;
 }
-/* Buttons */
+
 body.dark button,
 body.dark .btn-primary,
 body.dark .mini-btn {
@@ -2452,18 +2503,18 @@ body.dark .mini-btn {
   
 }
 
-/* Navbar */
+
 body.dark .navbar {
   background: transparent;
 }
 
-/* Sidebar */
+
 body.dark .user-sidebar {
   background: #22253a;
   color: #ffffff;
 }
 
-/* Sidebar links */
+
 body.dark .sidebar-nav a {
   color: #ffffff;
 }
@@ -2471,10 +2522,10 @@ body.dark .sidebar-nav a:hover {
   background: rgba(255, 255, 255, 0.08);
 }
 
-/* Floating profile */
+
 body.dark #floatingProfile {
   background: #ffffff;
-  color: #000000; /* as you requested */
+  color: #000000; 
 }
 body.dark .settings-card,
 body.dark .pricing-card,
@@ -2505,18 +2556,18 @@ body.dark .feature-card-light {
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-/* PRICING */
+
 body.dark .price-card {
   background: rgba(255, 255, 255, 0.06) !important;
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-/* SUPPORT (safe, matches working page) */
+
 body.dark .support-card {
   background: rgba(255, 255, 255, 0.06) !important;
 }
 
-/* SETTINGS / DASHBOARD */
+
 body.dark .settings-card,
 body.dark .ticket-card {
   background: rgba(255, 255, 255, 0.06) !important;
@@ -2530,7 +2581,7 @@ body.dark .auth-overlay .auth-card {
   color: #ffffff;
 }
 
-/* AUTH PAGE BACKGROUND */
+
 body.dark .auth-bg,
 body.dark .auth-page .auth-bg {
   background:
@@ -2539,19 +2590,19 @@ body.dark .auth-page .auth-bg {
     #1f2230;
 }
 
-/* SETTINGS PAGE */
+
 body.dark .settings-card {
   background: rgba(255, 255, 255, 0.06) !important;
   border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-/* SETTINGS SIDEBAR */
+
 body.dark .settings-sidebar {
   background: rgba(255, 255, 255, 0.05) !important;
   border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-/* INPUTS INSIDE AUTH + SETTINGS */
+
 body.dark .auth-card input,
 body.dark .settings-card input {
   background: rgba(255, 255, 255, 0.08);
@@ -2563,8 +2614,8 @@ body.dark .settings-card input {
   position: fixed;
   inset: 0;
 
-  background: rgba(15, 15, 25, 0.55);  /* dark dim */
-  backdrop-filter: blur(6px);          /* SMALL blur */
+  background: rgba(15, 15, 25, 0.55);  
+  backdrop-filter: blur(6px);          
   -webkit-backdrop-filter: blur(6px);
 
   display: none;
@@ -2574,27 +2625,27 @@ body.dark .settings-card input {
 }
 
 
-/* FORCE modal to be sharp */
 .auth-card,
 .auth-page .auth-card,
 .auth-overlay .auth-card {
   backdrop-filter: none !important;
   filter: none !important;
 
-  background: #ffffff !important; /* clean white */
-  color: #0b032d;
+background: rgba(88, 28, 135, 0.65) !important;  color: #ffffff;
 
-  box-shadow: 0 30px 80px rgba(0,0,0,0.25);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.35);
 }
 
-/* Inputs clarity */
 .auth-card input {
-  background: #ffffff;
-  color: #0b032d;
-  border: 1px solid #d1d5db;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.55);
 }
 
-/* Headings & text */
+.auth-card input::placeholder {
+  color: rgba(255, 255, 255, 0.8);
+}
+
 .auth-card h2,
 .auth-card p,
 .auth-card label {
@@ -2605,7 +2656,7 @@ body.dark .settings-card input {
   padding: 36px;
   border-radius: 18px;
 
-  background: #ffffff;              /* SOLID WHITE */
+  background: #ffffff;              
   box-shadow: 0 30px 80px rgba(0,0,0,0.35);
 
   text-align: center;
@@ -2638,9 +2689,6 @@ body.dark .settings-card input {
   font-size: 15px;
 }
 
-.auth-card input::placeholder {
-  color: #9ca3af;
-}
 .auth-card .btn-primary {
   width: 100%;
   padding: 12px;
@@ -2670,8 +2718,8 @@ body.dark .settings-card input {
   padding: 36px;
   border-radius: 18px;
 
-  background: #ffffff;          /* SOLID */
-  backdrop-filter: none;        /* IMPORTANT */
+  background: #ffffff;          
+  backdrop-filter: none;        
   -webkit-backdrop-filter: none;
 
   box-shadow: 0 30px 80px rgba(0,0,0,0.35);
@@ -2706,7 +2754,7 @@ button:focus-visible,
   outline: none !important;
 }
 
-/* SIDEBAR & NAV ACTIVE STATE */
+
 .settings-sidebar button.active,
 .sidebar-menu button.active,
 .sidebar-nav a.active {
@@ -2714,7 +2762,7 @@ button:focus-visible,
   color: #ffffff !important;
 }
 
-/* REMOVE ACTIVE OVERLAY FROM CARDS */
+
 .support-card:active,
 .settings-card:active,
 .feature-card:active,
@@ -2724,13 +2772,13 @@ button:focus-visible,
   box-shadow: 0 18px 40px rgba(0,0,0,0.35) !important;
 }
 
-/* KILL TAP HIGHLIGHT (IMPORTANT FOR CHROME) */
+
 * {
   -webkit-tap-highlight-color: transparent;
 }
 body.dark {
   background:
-    /* single soft glow from bottom-right */
+    
     radial-gradient(
       circle at 120% 120%,
       rgba(138, 92, 246, 0.22),
@@ -2834,26 +2882,26 @@ body.dark {
   margin-top: 4px;
 }
 
-/* Empty state */
+
 .empty-state {
   text-align: center;
   padding: 30px;
   opacity: 0.8;
 }
 
-/* DARK THEME FIX */
+
 body.dark .notification-item {
   background: #2a2e3a;
   border-color: #3b3f4d;
 }
-/* Notification row layout */
+
 .notification-link {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-/* Red circular badge */
+
 .notif-badge {
   margin-left: auto;
 
@@ -2861,7 +2909,7 @@ body.dark .notification-item {
   height: 20px;
   padding: 0 6px;
 
-  background: #ef4444; /* professional red */
+  background: #ef4444; 
   color: #ffffff;
 
   font-size: 12px;
@@ -2944,8 +2992,8 @@ body.dark .notif-badge {
 }
 .help-search input {
   width: 100%;
-  height: 42px;              /* ↓ reduced height */
-  padding: 0 14px 0 38px;    /* space for emoji */
+  height: 42px;              
+  padding: 0 14px 0 38px;    
   border-radius: 12px;
   border: 1px solid #e4e4e7;
   font-size: 14px;
@@ -2984,7 +3032,7 @@ body.dark .notif-badge {
 }
  .help-page {
   min-height: 100vh;
-  padding: 110px 40px 40px; /* space for logo & back button */
+  padding: 110px 40px 40px; 
   display: block;
   overflow-x: hidden;
   max-width: 1200px;
@@ -3035,23 +3083,23 @@ body.dark .notif-badge {
   text-align: center;
   margin-top: 70px;
 }
-/* HELP CENTER CARD ENHANCEMENTS */
+
 .help-card {
   position: relative;
   padding: 24px;
   border-radius: 16px;
 
-  /* 🔲 BORDER BOX */
+  
   border: 1px solid rgba(255, 255, 255, 0.12);
 
-  /* 🎨 GLASS EFFECT */
+  
   background: linear-gradient(
     180deg,
     rgba(255, 255, 255, 0.06),
     rgba(255, 255, 255, 0.02)
   );
 
-  /* 🌫 DEPTH */
+  
   box-shadow:
     0 12px 30px rgba(0, 0, 0, 0.15),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
@@ -3061,7 +3109,7 @@ body.dark .notif-badge {
 .help-card p {
   color: #1f2937;
 }
-/* HOVER – PROFESSIONAL FEEL */
+
 .help-card:hover {
   transform: translateY(-6px);
   border-color: rgba(170, 120, 255, 0.55);
@@ -3070,7 +3118,7 @@ body.dark .notif-badge {
     0 0 0 1px rgba(170, 120, 255, 0.35);
 }
 
-/* CARD TITLE */
+
 .help-card h3 {
   font-size: 18px;
   margin-bottom: 14px;
@@ -3078,7 +3126,7 @@ body.dark .notif-badge {
   font-weight: 700;
 }
 
-/* FAQ ITEMS */
+
 .help-card details {
   margin-top: 12px;
   color: #1f2937;
@@ -3096,7 +3144,7 @@ body.dark .notif-badge {
 .help-card summary:hover {
   color: #b58cff;
 }
-/* Improve readability inside help cards */
+
 .help-card p,
 .help-card li,
 .help-card details {
@@ -3111,7 +3159,7 @@ body.dark .notif-badge {
   padding: 8px 0;
   line-height: 1.6;
 }
-/* Space between FAQ items */
+
 .help-card details + details {
   margin-top: 18px;
 }
@@ -3151,13 +3199,13 @@ body.dark .notif-badge {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
 }
 
-/* Search icon */
+
 .help-search .search-icon {
   font-size: 16px;
   opacity: 0.6;
 }
 
-/* Search input */
+
 .help-search input {
   border: none;
   outline: none;
@@ -3167,7 +3215,7 @@ body.dark .notif-badge {
   background: transparent;
 }
 
-/* Focus state */
+
 .help-search:focus-within {
   border-color: #8b5cf6;
   box-shadow: 0 10px 28px rgba(139, 92, 246, 0.15);
@@ -3177,7 +3225,7 @@ body.dark .help-search {
   border-color: rgba(255, 255, 255, 0.12);
 }
 body.help-page-active {
-  overflow: hidden;
+  overflow-x: hidden;
 }
 body.dark .help-search input {
   color: #ffffff;
@@ -3195,7 +3243,7 @@ body.dark .help-search .search-icon {
   color: #9ca3af;
 }
 
-/* Search icon */
+
 .help-search::before {
   content: "🔍";
   position: absolute;
@@ -3328,7 +3376,7 @@ body.dark .help-search .search-icon {
   opacity: 1;
   transform: translateX(50%) translateY(4px);
 }
-/* FORCE BIGGER CLOSE BUTTON (OVERRIDE ALL) */
+
 .auth-card .auth-close {
   font-size: 32px !important;
   width: 42px !important;
@@ -3392,14 +3440,14 @@ button:active,
   overflow: visible;
 }
 
-/* Hero should NEVER be centered vertically */
+
 .help-hero {
   margin-top: 0;
   padding-top: 20px;
   text-align: center;
 }
 
-/* Reduce excessive spacing */
+
 .help-hero h1 {
   margin-bottom: 8px;
 }
@@ -3408,18 +3456,18 @@ button:active,
   margin-bottom: 16px;
 }
 
-/* Search bar tighter */
+
 .help-search {
   margin: 16px auto 28px;
 }
 
-/* Cards grid spacing */
+
 .help-grid {
   margin-top: 10px;
   margin-bottom: 30px;
 }
 
-/* CTA spacing */
+
 .help-contact {
   margin-top: 30px;
   padding-bottom: 20px;
@@ -3432,12 +3480,6 @@ button:active,
   position: relative;
   z-index: 10;
 }
-.back-btn {
-  position: fixed;
-  top: 20px;
-  z-index: 20;
-}
-
 .sidebar-search input,
 #sidebarSearch {
   width: 100%;
@@ -3465,7 +3507,7 @@ button:active,
   visibility: visible !important;
 }
 
-/* Active state */
+
 .settings-sidebar a.active {
   background: rgba(108, 92, 231, 0.08) !important;
   color: #5f2eea !important;
@@ -3516,7 +3558,7 @@ button:active,
   font-weight: 600;
 }
 
-/* 🔒 HARD OVERRIDE for click states */
+
 .settings-sidebar button:focus,
 .settings-sidebar button:active {
   color: #1f1f3d !important;
@@ -3555,7 +3597,7 @@ button:active,
   font-weight: 600;
 }
 
-/* 🚫 Disable browser focus side-effects */
+
 .settings-sidebar button:focus-visible {
   outline: none !important;
 }
@@ -3564,19 +3606,19 @@ img {
   height: auto;
 }
 .features-grid-light {
-  display: grid !important;
-  grid-template-columns: repeat(3, 1fr) !important;
-  gap: 28px !important;                
-
-  max-width: 900px !important;          
-  margin: 60px auto 0 !important;       
-  
-  justify-items: center !important;
-  align-items: stretch !important;
-   margin-top: 28px !important;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  max-width: 900px;
+  margin: 40px auto 80px;
+}
+@media (max-width: 600px) {
+  .features-grid-light {
+    grid-template-columns: 1fr;
+    padding: 0 16px;
+  }
 }
 
-/* Feature cards */
 .features-grid-light .feature-card-light {
   width: 100% !important;
   max-width: 260px !important;        
@@ -3590,7 +3632,7 @@ img {
     grid-template-columns: repeat(2, 1fr) !important;
   }
 }
-/* -------- DARK THEME TEXT FIX -------- */
+
 .feature-dark,
 body.dark {
   color: #eaeaf0;
@@ -3608,12 +3650,12 @@ body.dark {
   color: #cfcfe6;
 }
 
-/* Muted text (email, subtitles) */
+
 .feature-dark .muted,
 .feature-dark .sub-text {
   color: #b6b6d6;
 }
-/* -------- SETTINGS SIDEBAR -------- */
+
 .settings-sidebar {
   padding: 10px;
 }
@@ -3626,13 +3668,13 @@ body.dark {
   color: #cfcfe6;
 }
 
-/* ACTIVE ITEM */
+
 .settings-sidebar .item.active {
   background: rgba(139, 92, 246, 0.18);
   color: #ffffff;
   box-shadow: inset 0 0 0 1px rgba(139, 92, 246, 0.4);
 }
-/* -------- SETTINGS CARDS -------- */
+
 .settings-card,
 .account-card {
   background: rgba(255, 255, 255, 0.06);
@@ -3641,7 +3683,7 @@ body.dark {
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* Inputs inside dark cards */
+
 .feature-dark input {
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.15);
@@ -3651,7 +3693,7 @@ body.dark {
 .feature-dark input::placeholder {
   color: #b8b8d6;
 }
-/* -------- BUTTON FIX -------- */
+
 .feature-dark .mini-btn,
 .feature-dark .btn-primary {
   background: linear-gradient(135deg, #7c5cff, #9f7bff);
@@ -3662,50 +3704,47 @@ body.dark {
 .feature-dark .mini-btn:hover {
   opacity: 0.9;
 }
-/* ===== FIX SETTINGS OVERFLOW (DARK ONLY) ===== */
+
 body.dark .settings-page {
   position: relative;
-  overflow: hidden;           /* CLIPS gradient */
-  border-radius: 22px;        /* same rounding you see */
+  overflow: hidden;           
+  border-radius: 22px;        
 }
-/* ===== FIX SETTINGS OVERFLOW (DARK ONLY) ===== */
+
 body.dark .settings-page {
   position: relative;
-  overflow: hidden;           /* CLIPS gradient */
-  border-radius: 22px;        /* same rounding you see */
+  overflow: hidden;           
+  border-radius: 22px;        
 }
-/* ===== FIX INPUT TEXT COLOR ===== */
+
 body.dark .settings-card input {
   color: #ffffff !important;
   background: rgba(255,255,255,0.08) !important;
 }
-/* ===== FIX CARD VISUAL OVERFLOW ===== */
+
 body.dark .settings-card {
   backdrop-filter: blur(10px);
   box-shadow: 0 12px 28px rgba(0,0,0,0.35);
 }
-/* ==========================================
-   SETTINGS PAGE – DARK MODE HARD OVERRIDE
-   ========================================== */
 
 body.dark .dark-fix,
 body.dark .dark-fix * {
   color: #ffffff !important;
 }
 
-/* Muted text */
+
 body.dark .dark-fix .muted {
   color: rgba(255,255,255,0.7) !important;
 }
 
-/* Cards */
+
 body.dark .dark-fix .settings-card,
 body.dark .dark-fix .settings-card.light {
   background: rgba(255,255,255,0.08) !important;
   border: 1px solid rgba(255,255,255,0.15);
 }
 
-/* Inputs */
+
 body.dark .dark-fix input {
   background: rgba(0,0,0,0.35) !important;
   color: #ffffff !important;
@@ -3715,11 +3754,6 @@ body.dark .dark-fix input {
 body.dark .dark-fix input::placeholder {
   color: rgba(255,255,255,0.55) !important;
 }
-
-/* ===============================
-   SIDEBAR ACTIVE BUTTON FIX
-   =============================== */
-
 .settings-sidebar {
   overflow: hidden !important;
 }
@@ -3732,28 +3766,28 @@ body.dark .dark-fix input::placeholder {
   position: relative;
 }
 
-/* Remove any pseudo overflow */
+
 .settings-sidebar button::before,
 .settings-sidebar button::after {
   display: none !important;
 }
 
-/* Active highlight */
+
 .settings-sidebar button.active {
   background: linear-gradient(135deg, #6d5dfc, #8f7bff) !important;
   color: #ffffff !important;
   box-shadow: inset 0 0 0 1px rgba(255,255,255,0.2);
 }
-/* NAV LEFT (Hamburger + Logo) */
+
 .nav-left {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-left: -12px;   /* 👈 moves hamburger left */
+  margin-left: -12px;   
 }
 
 
-/* Hamburger button */
+
 .hamburger-btn {
   width: 42px;
   height: 42px;
@@ -3782,24 +3816,18 @@ body.dark .dark-fix input::placeholder {
   background: #ede9fe;
 }
 
-/* DARK MODE */
+
 body.dark .hamburger-btn {
   background: rgba(30,30,30,0.9);
   color: #fff;
 }
-/* ===============================
-   SUPPORT PAGE — DARK THEME FIX
-   =============================== */
-
-
-/* Headings */
 body.dark.support-page h1,
 body.dark.support-page h2,
 body.dark.support-page h3 {
   color: #ffffff !important;
 }
 
-/* Paragraphs */
+
 body.dark.support-page p,
 body.dark.support-page span,
 body.dark.support-page label,
@@ -3841,7 +3869,7 @@ body.dark .support-modal textarea::placeholder {
 }
 
 
-/* Headings */
+
 body.support-page h1,
 body.support-page h2,
 body.support-page h3,
@@ -3849,7 +3877,7 @@ body.support-page h4 {
   color: #0b032d !important;
 }
 
-/* Paragraphs & labels */
+
 body.support-page p,
 body.support-page span,
 body.support-page label,
@@ -3858,61 +3886,23 @@ body.support-page strong {
   color: #1f2937 !important;
 }
 
-/* Subtitle text */
+
 body.support-page .sub,
 body.support-page .muted {
   color: #374151 !important;
 }
 
-/* Support cards */
+
 body.support-page .support-card {
   color: #0b032d;
 }
 
-/* Ticket history text */
+
 body.support-page #ticketList p,
 body.support-page #ticketList strong,
 body.support-page #ticketList small {
   color: #0b032d !important;
 }
-/* FORCE CLOSE BUTTON TO TOP-RIGHT */
-button.back-btn {
-  position: fixed !important;
-
-  top: 16px !important;
-  right: 16px !important;
-  left: unset !important;     /* 🔥 THIS fixes the overlap */
-  bottom: unset !important;
-
-  width: 42px;
-  height: 42px;
-
-  border-radius: 50%;
-  border: none;
-
-  color: #fff;
-
-  font-size: 20px;
-  line-height: 1;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  cursor: pointer;
-  z-index: 9999;
-}
-/* REMOVE OVERLAY / GHOST BACKGROUND FROM CLOSE BUTTON */
-.back-btn {
-  background: #111 !important;   /* solid, no overlay */
-  box-shadow: none !important;   /* ❌ removes shadow halo */
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-}
-/* ===============================
-   DASHBOARD CLOSE BUTTON (TOP RIGHT)
-   =============================== */
-
 .dashboard-close-btn {
   position: fixed;
   top: 18px;
@@ -3943,19 +3933,15 @@ button.back-btn {
 
 .dashboard-close-btn:hover {
   transform: scale(1.08);
-  background: rgba(124, 58, 237, 0.95); /* Pep purple */
+  background: rgba(124, 58, 237, 0.95); 
 }
-/* =====================================
-   FIX: REMOVE WHITE OVERLAY ON TICKET FILTER BUTTONS
-   ===================================== */
-
 .ticket-filters .filter-btn {
   background-clip: padding-box;
   -webkit-tap-highlight-color: transparent;
   transition: background 0.2s ease, color 0.2s ease;
 }
 
-/* REMOVE FOCUS / ACTIVE STYLES */
+
 .ticket-filters .filter-btn:focus,
 .ticket-filters .filter-btn:active,
 .ticket-filters .filter-btn:focus-visible {
@@ -3964,14 +3950,14 @@ button.back-btn {
   background-image: none !important;
 }
 
-/* REMOVE CHROME CLICK FLASH */
+
 .ticket-filters .filter-btn::after {
   content: none !important;
 }
 
-/* KEEP ACTIVE STYLE CLEAN */
+
 .ticket-filters .filter-btn.active {
-  background: rgba(130, 80, 255, 0.18); /* subtle purple */
+  background: rgba(130, 80, 255, 0.18); 
   color: #7b4dff;
   border: 1px solid #7b4dff;
 }
@@ -3987,14 +3973,10 @@ button.back-btn {
   
 }
 
-/* keep heading untouched */
+
 .support-modal h3 {
   color: inherit;
 }
-/* ===============================
-   SUPPORT MODAL – PROPER GLASS FIX
-   =============================== */
-
 .support-modal {
   position: relative;
   background: linear-gradient(145deg, #7a45c8, #5b2aa8);
@@ -4004,7 +3986,7 @@ button.back-btn {
   filter: none !important;
 }
 
-/* Glass blur layer (instead of opacity on text) */
+
 .support-modal::before {
   content: "";
   position: absolute;
@@ -4015,13 +3997,13 @@ button.back-btn {
   z-index: 0;
 }
 
-/* Bring content above blur */
+
 .support-modal * {
   position: relative;
   z-index: 1;
 }
 
-/* FORCE WHITE TEXT (numbers + email) */
+
 .support-modal p,
 .support-modal span,
 .support-modal strong {
@@ -4030,3 +4012,148 @@ button.back-btn {
 }
 
 
+@media (min-width: 1200px) {
+  html {
+    zoom: 0.8;   
+  }
+}
+
+.back-btn {
+  position: static !important;          
+  width: auto !important;
+  height: auto !important;
+  border-radius: 0 !important;
+  border: none !important;
+
+  background: transparent !important;   
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+
+  padding: 0 4px !important;
+  margin-left: 70px;
+
+  color: #111111 !important;
+  font-size: 30px !important;
+  font-weight: 800 !important;
+
+  display: inline-block !important;
+  cursor: pointer;
+}
+
+.auth-card h2 {
+  color: #ffffff !important;
+}
+
+.auth-card p,
+.auth-card span,
+.auth-card label {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+
+.auth-card .auth-switch span {
+  color: #ffffff !important;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+
+
+.support-section {
+  padding: 40px 20px 60px;   
+}
+
+
+.support-section .sub {
+  margin-bottom: 8px;        
+}
+
+
+.support-section > .my-ticket-btn {
+  margin: 10px auto 20px;    
+}
+
+
+.support-section .support-card {
+  padding: 18px 18px !important;   
+  min-height: 190px !important;    
+}
+
+
+
+.features-hero-light {
+  padding: 50px 20px 24px;        
+}
+
+.features-hero-light h1 {
+  margin-bottom: 6px;             
+}
+
+.features-hero-light p {
+  margin-bottom: 6px;             
+}
+
+
+.features-grid-light {
+  margin: 24px auto 40px;         
+  gap: 20px;                       
+}
+
+
+.features-grid-light .feature-card-light {
+  padding: 18px 18px;             
+  min-height: 160px;              
+}
+
+
+
+.hero {
+  padding: 40px 60px;        
+}
+
+
+.hero-title {
+  margin-bottom: 16px;       
+}
+
+
+.hero-desc {
+  margin-top: 10px;          
+  margin-bottom: 22px;       
+}
+
+
+.hero-left img.chat-ui {
+  max-width: 600px;          
+}
+
+.features-page .features-hero-light {
+  padding: 32px 20px 12px;      
+}
+
+.features-page .features-hero-light h1 {
+  margin-bottom: 4px;
+}
+
+.features-page .features-hero-light p {
+  margin-bottom: 4px;
+}
+
+
+.features-page .features-grid-light {
+  margin: 16px auto 16px;       
+  gap: 18px;                    
+}
+
+
+.features-page .features-grid-light .feature-card-light {
+  padding: 16px 16px;
+  min-height: 150px;
+}
+
+.modal-close,
+.modal-close-btn {
+  display: none !important;
+}

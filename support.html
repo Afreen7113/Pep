@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Support – Pep</title>
   <link rel="stylesheet" href="./css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
@@ -10,18 +11,14 @@
 <body class="support-page">
 
 
-<button class="back-btn" onclick="goBack()">←</button>
-
-<!-- NAVBAR -->
 <header class="navbar">
   <div class="nav-left">
-    <!-- HAMBURGER -->
     <button class="hamburger-btn" onclick="openSidebar()">☰</button>
-
-    <!-- LOGO -->
     <div class="logo-wrapper">
       <span class="logo">Pep</span>
     </div>
+        <button class="back-btn" onclick="goBack()">←</button> 
+
   </div>
 
 
@@ -38,7 +35,7 @@
   </div>
 </header>
 
-<!-- SUPPORT -->
+
 <section class="support-section">
   <h1>Support Center</h1>
   <p class="sub">We’re here to help you 24/7</p>
@@ -69,8 +66,7 @@
   </div>
 </section>
 
-<!-- CHAT CHOICE -->
- <button class="modal-close" onclick="closeActiveModal()">✕</button>
+
 
 <div class="modal" id="chatChoiceModal">
   <div class="modal-box support-modal">
@@ -85,8 +81,7 @@
   </div>
 </div>
 
-<!-- SUPPORT TICKET MODAL -->
- <button class="modal-close" onclick="closeActiveModal()">✕</button>
+
 
 <div class="modal" id="supportModal">
   <div class="modal-box support-modal ticket-modal">
@@ -123,8 +118,6 @@
   </div>
 </div>
 
-<!-- CONTACT -->
- <button class="modal-close" onclick="closeActiveModal()">✕</button>
 
 <div class="modal" id="contactModal">
   <div class="modal-box support-modal">
@@ -143,7 +136,6 @@
     </div>
   </div>
 </div>
-<button class="modal-close" onclick="closeActiveModal()">✕</button>
 
 <div class="modal" id="ticketHistoryModal">
   <div class="modal-box support-modal">
@@ -157,14 +149,14 @@
   </div>
 </div>
 
-<!-- AUTH MODAL -->
+
 <div class="auth-overlay" id="authOverlay">
   <div class="auth-card">
 
     <span class="auth-close" onclick="closeAuthModal()">×</span>
     <div class="auth-logo">Pep</div>
 
-    <!-- SIGNUP -->
+    
     <form id="signupForm" onsubmit="handleSignup(event)">
       <h2>Create Account</h2>
       <input type="text" id="signupName" placeholder="Name" required>
@@ -177,7 +169,7 @@
       </p>
     </form>
 
-    <!-- LOGIN -->
+    
     <form id="loginForm" style="display:none;" onsubmit="handleLogin(event)">
       <h2>Login</h2>
       <input type="email" id="loginEmail" placeholder="Email" required>
@@ -192,7 +184,7 @@
   </div>
 </div>
 
-<!-- ================= JS ================= -->
+
 <script>
 /* AUTH UI */
 function openAuthModal(){ authOverlay.style.display="flex"; }
@@ -370,7 +362,7 @@ function emailSupport(){ window.location.href="mailto:support@pep.com"; }
 function goBack(){ window.location.href="index.html"; }
 </script>
 
-<!-- TAWK -->
+
 <script type="text/javascript">
 var Tawk_API=Tawk_API||{};
 (function(){
@@ -464,7 +456,7 @@ function closeTicketHistory() {
 }
 
 </script>
-<!-- USER SIDEBAR -->
+
 <div id="sidebarOverlay" class="sidebar-overlay" onclick="closeSidebar()"></div>
 <aside id="userSidebar" class="user-sidebar">
   <button class="sidebar-close" onclick="closeSidebar()">✕</button>
@@ -482,7 +474,7 @@ function closeTicketHistory() {
 
   <div class="sidebar-menu modern">
 
-  <!-- Search -->
+  
   <input type="text" placeholder="Search…" id="sidebarSearch" />
 
 
@@ -595,7 +587,7 @@ document.addEventListener("click", (e) => {
 <script src="js/appState.js"></script>
 <script src="js/sidebar.js"></script>
 <script src="js/session.js"></script>
-<!-- NOTIFICATIONS MODAL -->
+
  <button class="modal-close" onclick="closeActiveModal()">✕</button>
 
 <div class="modal" id="notificationModal">
@@ -611,7 +603,7 @@ document.addEventListener("click", (e) => {
   </div>
 </div>
 
-<!-- NOTIFICATIONS SCRIPT -->
+
 <script>
 const notifications = [
   { text: "Welcome to Pep 🎉", time: "Just now" },

@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Settings – Pep</title>
   <link rel="stylesheet" href="css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
@@ -9,17 +10,14 @@
 
 <body>
 
-<button class="back-btn" onclick="history.back()">←</button>
-<button class="back-btn" style="left:auto;right:18px" onclick="location.href='index.html'">✕</button>
 <header class="navbar">
   <div class="nav-left">
-    <!-- HAMBURGER -->
-    <button class="hamburger-btn" onclick="openSidebar()">☰</button>
-
-    <!-- LOGO -->
+    
     <div class="logo-wrapper">
       <span class="logo">Pep</span>
     </div>
+    <button class="back-btn" onclick="history.back()">←</button>
+
   </div>
 
 </header>
@@ -28,7 +26,7 @@
 
   <div class="settings-layout">
 
-    <!-- LEFT NAV -->
+    
     <aside class="settings-sidebar">
       <h3 class="settings-title">Settings</h3>
       <button class="active" onclick="openSection('account',this)">Account</button>
@@ -39,10 +37,10 @@
 <button class="danger" onclick="endSession()">Log out</button>
     </aside>
 
-    <!-- MAIN -->
+    
     <main class="settings-content">
 
-      <!-- ACCOUNT -->
+      
       <section id="account" class="settings-section active">
         <div class="section-header">
           <div>
@@ -76,7 +74,7 @@
         </div>
       </section>
 
-      <!-- SECURITY -->
+      
       <section id="security" class="settings-section">
         <h2>Security</h2>
         <p class="muted">Control access and authentication</p>
@@ -94,7 +92,7 @@
             <strong>Two-Factor Authentication</strong>
             <p class="muted">Protect your account with OTP</p>
           </div>
-<span id="twoFAChip" class="status-chip warning" onclick="toggle2FA()" style="cursor:pointer">
+<span id="twoFAChip" class="status-chip is-disabled" onclick="toggle2FA()" style="cursor:pointer">
   Disabled
 </span>
 
@@ -109,7 +107,7 @@
         </div>
       </section>
 
-      <!-- BILLING -->
+      
       <section id="billing" class="settings-section">
         <h2>Plans & Billing</h2>
         <p class="muted">Subscription & invoices</p>
@@ -127,7 +125,7 @@
         </div>
       </section>
 
-      <!-- TEAM -->
+      
       <section id="team" class="settings-section">
         <h2>Team</h2>
         <p class="muted">Manage access</p>
@@ -147,7 +145,7 @@
         </div>
       </section>
 
-      <!-- PREFERENCES -->
+      
       <section id="preferences" class="settings-section">
         <h2>Preferences</h2>
         <p class="muted">Customize experience</p>
@@ -427,7 +425,7 @@ function enforceInviteAccess() {
 document.addEventListener("DOMContentLoaded", enforceInviteAccess);
 
 </script>
-<!-- LOGIN ACTIVITY MODAL -->
+
  <button class="modal-close" onclick="closeActiveModal()">✕</button>
 
 <div class="modal" id="loginActivityModal">
@@ -454,7 +452,7 @@ document.addEventListener("DOMContentLoaded", enforceInviteAccess);
 <script src="js/appState.js"></script>
 <script src="js/sidebar.js"></script>
 <script src="js/session.js"></script>
-<!-- NOTIFICATIONS SCRIPT -->
+
 <script>
 const notifications = [
   { text: "Welcome to Pep 🎉", time: "Just now" },
@@ -515,7 +513,7 @@ document.addEventListener("DOMContentLoaded", updateNotificationBadge);
 </script>
 
 
-<!-- NOTIFICATIONS MODAL -->
+
  <button class="modal-close" onclick="closeActiveModal()">✕</button>
 
 <div class="modal" id="notificationModal">

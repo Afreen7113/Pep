@@ -11,15 +11,12 @@
 
 <body>
 
-<button class="back-btn" onclick="goBack()">←</button>
-
-<!-- NAVBAR -->
 <header class="navbar">
   <div class="nav-left">
-    <!-- HAMBURGER -->
+    
     <button class="hamburger-btn" onclick="openSidebar()">☰</button>
 
-    <!-- LOGO -->
+    
     <div class="logo-wrapper">
       <span class="logo">Pep</span>
     </div>
@@ -33,13 +30,13 @@
     <a href="support.html">Support</a>
   </nav>
 
-  <!-- AUTH AREA -->
+  
   <div id="navAuthArea">
     <button class="btn-primary" onclick="openAuthModal()">Get Started</button>
   </div>
 </header>
 
-<!-- HERO -->
+
 <section class="hero">
   <div class="hero-left">
     <img src="assets/images/chat-ui.png" alt="Chat UI" class="chat-ui">
@@ -60,7 +57,7 @@
 
     <div class="store-buttons">
 
-  <!-- Apple App Store -->
+  
   <a
     href="https://www.apple.com/app-store/"
     target="_blank"
@@ -74,7 +71,7 @@
     >
   </a>
 
-  <!-- Google Play Store -->
+  
   <a
     href="https://play.google.com/store"
     target="_blank"
@@ -93,14 +90,14 @@
   </div>
 </section>
 
-<!-- AUTH MODAL -->
+
 <div class="auth-overlay" id="authOverlay">
   <div class="auth-card">
 
     <span class="auth-close" onclick="closeAuthModal()">×</span>
     <div class="auth-logo">Pep</div>
 
-    <!-- SIGNUP -->
+    
     <form id="signupForm" onsubmit="handleSignup(event)">
       <h2>Create Account</h2>
 
@@ -116,7 +113,7 @@
       </p>
     </form>
 
-    <!-- LOGIN -->
+    
     <form id="loginForm" style="display:none;" onsubmit="handleLogin(event)">
       <h2>Login</h2>
 
@@ -297,7 +294,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (backBtn) backBtn.style.display = "none";
 });
 </script>
-<!-- USER SIDEBAR -->
+
 <div id="sidebarOverlay" class="sidebar-overlay" onclick="closeSidebar()"></div>
 <aside id="userSidebar" class="user-sidebar">
   <button class="sidebar-close" onclick="closeSidebar()">✕</button>
@@ -315,7 +312,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   <div class="sidebar-menu modern">
 
-  <!-- Search -->
+  
   <input
   type="text"
   id="sidebarSearch"
@@ -372,7 +369,7 @@ document.addEventListener("DOMContentLoaded", () => {
 </div>
 
 
-<!-- NOTIFICATIONS MODAL -->
+
  <button class="modal-close" onclick="closeActiveModal()">✕</button>
 
 <div class="modal" id="notificationModal">
@@ -391,7 +388,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <script src="js/sidebar.js"></script>
 <script src="js/session.js"></script>
 
-<!-- NOTIFICATIONS SCRIPT -->
+
 <script>
 const notifications = [
   { text: "Welcome to Pep 🎉", time: "Just now" },

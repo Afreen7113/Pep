@@ -24,16 +24,13 @@ function createAccount() {
     closeAuthModal();
 }
 function handleCreateAccount(event) {
-    event.preventDefault(); // stop page reload
-
-    // Browser will now ask to save password automatically
+    event.preventDefault(); 
 
     alert("Account created successfully!");
 
-    // Clear inputs
     document.getElementById("authForm").reset();
 
-    // Close modal after short delay
+    
     setTimeout(() => {
         closeAuthModal();
     }, 300);

@@ -15,17 +15,19 @@ function closeLoginActivity() {
 }
 
 function toggle2FA() {
-  const chip = document.querySelector(".status-chip");
-  if (!chip) return;
+  const chip = document.getElementById('twoFAChip');
+  const isEnabled = chip.classList.contains('is-enabled');
 
-  if (chip.innerText === "Disabled") {
-    chip.innerText = "Enabled";
-    chip.classList.remove("warning");
-    chip.classList.add("success");
+  if (isEnabled) {
+    // Turn OFF → Disabled (red)
+    chip.classList.remove('is-enabled');
+    chip.classList.add('is-disabled');
+    chip.textContent = 'Disabled';
   } else {
-    chip.innerText = "Disabled";
-    chip.classList.remove("success");
-    chip.classList.add("warning");
+    // Turn ON → Enabled (green)
+    chip.classList.remove('is-disabled');
+    chip.classList.add('is-enabled');
+    chip.textContent = 'Enabled';
   }
 }
 

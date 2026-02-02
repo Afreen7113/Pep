@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pricing – Pep</title>
   <link rel="stylesheet" href="./css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
@@ -9,24 +10,20 @@
 
 <body>
 
-<button class="back-btn" onclick="goBack()">←</button>
-
-<!-- NAVBAR -->
 <header class="navbar">
   <div class="nav-left">
-    <!-- HAMBURGER -->
     <button class="hamburger-btn" onclick="openSidebar()">☰</button>
 
-    <!-- LOGO -->
     <div class="logo-wrapper">
       <span class="logo">Pep</span>
     </div>
-  </div>
+        <button class="back-btn" onclick="goBack()">←</button>
 
+  </div>
 
   <nav>
     <a href="index.html">Home</a>
-    <a href="features.html">Features</a>
+    <a href="features.html" >Features</a>
     <a href="pricing.html" class="active">Pricing</a>
     <a href="support.html">Support</a>
   </nav>
@@ -36,7 +33,7 @@
   </div>
 </header>
 
-<!-- PRICING -->
+
 <section class="pricing-section">
   <h1 class="pricing-title">Simple Pricing</h1>
   <p class="pricing-sub">Choose a plan that fits your needs</p>
@@ -89,7 +86,7 @@
   </div>
 </section>
 
-<!-- PAYMENT MODAL -->
+
 <div class="modal" id="paymentModal">
   <div class="modal-box pay-box">
     <h3 id="planTitle">Payment</h3>
@@ -132,7 +129,7 @@
   </div>
 </div>
 
-<!-- FREE MODAL -->
+
 <div class="modal" id="freeModal">
   <div class="modal-box">
     <h3>🎉 Free Plan Activated</h3>
@@ -141,14 +138,14 @@
   </div>
 </div>
 
-<!-- AUTH MODAL -->
+
 <div class="auth-overlay" id="authOverlay">
   <div class="auth-card">
 
     <span class="auth-close" onclick="closeAuthModal()">×</span>
     <div class="auth-logo">Pep</div>
 
-    <!-- SIGNUP -->
+    
     <form id="signupForm" onsubmit="handleSignup(event)">
       <h2>Create Account</h2>
       <input type="text" id="signupName" placeholder="Name" required>
@@ -161,7 +158,7 @@
       </p>
     </form>
 
-    <!-- LOGIN -->
+    
     <form id="loginForm" style="display:none;" onsubmit="handleLogin(event)">
       <h2>Login</h2>
       <input type="email" id="loginEmail" placeholder="Email" required>
@@ -176,7 +173,7 @@
   </div>
 </div>
 
-<!-- ================= JS ================= -->
+
 <script>
 /* AUTH UI */
 function openAuthModal(){ authOverlay.style.display="flex"; }
@@ -360,7 +357,7 @@ function goBack(){
   if (document.referrer) history.back();
    else window.location.href="index.html"; }
 </script>
-<!-- USER SIDEBAR -->
+
 <div id="sidebarOverlay" class="sidebar-overlay" onclick="closeSidebar()"></div>
 <aside id="userSidebar" class="user-sidebar">
   <button class="sidebar-close" onclick="closeSidebar()">✕</button>
@@ -378,7 +375,7 @@ function goBack(){
 
   <div class="sidebar-menu modern">
 
-  <!-- Search -->
+  
  <input type="text" placeholder="Search…" id="sidebarSearch" />
 
 
@@ -472,7 +469,7 @@ document.addEventListener("click", (e) => {
 <script src="js/sidebar.js"></script>
 <script src="js/session.js"></script>
 
-<!-- NOTIFICATIONS MODAL -->
+
  <button class="modal-close" onclick="closeActiveModal()">✕</button>
 
 <div class="modal" id="notificationModal">
@@ -488,7 +485,7 @@ document.addEventListener("click", (e) => {
   </div>
 </div>
 
-<!-- NOTIFICATIONS SCRIPT -->
+
 <script>
 const notifications = [
   { text: "Welcome to Pep 🎉", time: "Just now" },
