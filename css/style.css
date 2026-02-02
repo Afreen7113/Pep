@@ -4157,3 +4157,86 @@ body.support-page #ticketList small {
 .modal-close-btn {
   display: none !important;
 }
+/* === HOME PAGE HERO – PROFESSIONAL LAYOUT ================= */
+
+/* Reset fancy left/right offsets so text aligns naturally */
+.hero-title .connect,
+.hero-title .grow,
+.hero-title .share,
+.hero-desc {
+  margin-left: 0;
+}
+
+/* Base hero: a bit less vertical padding */
+.hero {
+  padding: 40px 32px;
+}
+
+/* Desktop / laptop layout */
+@media (min-width: 1024px) {
+  /* Center navbar + hero content in a clean frame */
+  .navbar,
+  .hero {
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+
+  .hero {
+    padding: 40px 24px;
+    align-items: center;
+  }
+
+  /* Keep image reasonable size */
+  .hero-left img.chat-ui {
+    max-width: 480px;
+  }
+
+  .hero-right {
+    max-width: 420px;
+  }
+
+  .hero-title .line {
+    font-size: 30px;
+  }
+
+  .hero-desc {
+    font-size: 15px;
+    max-width: 420px;
+  }
+}
+
+/* Tablet & mobile: stack nicely */
+@media (max-width: 1023px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 28px 16px;
+  }
+
+  .hero-left img.chat-ui {
+    width: 90%;
+    max-width: 360px;
+    margin: 0 auto 16px;
+  }
+
+  .hero-title {
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .hero-title .line {
+    font-size: 24px;
+  }
+
+  .hero-desc {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 8px;
+    margin-bottom: 18px;
+    max-width: 100%;
+  }
+
+  .store-buttons {
+    justify-content: center;
+  }
+}
